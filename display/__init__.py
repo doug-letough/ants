@@ -28,14 +28,12 @@ class Worker(threading.Thread):
     logging.warning('\033[92mStatus:\033[0m %s' % self.active, extra=data)
 
   def process(self, item):
-    data = {'type': 'Display worker %d: [%s]' % (self.ID, item['type'])}
-    logging.warning('\033[92mData:\033[0m %s' % (str(item)), extra=data)
     if item['type'] == 'ant':
-      self.display.draw_ant(item['ID'], item['old_position'], item['new_position'], item['color'])
+      self.display.draw_ant(item['ID'], item['old_position'], item['new_position'], item['radius'], item['color'], item['outline'])
     elif item['type'] == 'farm':
-      pass
+      self.display.draw_farm(item['ID'], item['position'], item['radius'], item['color'], item['outline'])
     elif item['type'] == 'mine':
-      self.display.draw_mine(item['ID'], item['position'], item['color'])
+      self.display.draw_mine(item['ID'], item['position'], item['radius'], item['color'], item['outline'])
 
   def stop(self):
     self.active = False
@@ -61,17 +59,34 @@ class Display(object):
     self.canvas.grid()
     self.canvas_frame.grid(row=0, column=0)
 
-  def draw_ant(self, ID, old_pos, new_pos, color):
+  def draw_ant(self, ID, old_pos, new_pos, radius, color, outline):
     if len(self.canvas.find_withtag(ID)) > 0:
-      x_offset = old_pos[0] - new_pos[0]
-      y_offset = old_pos[1] - new_pos[1]
+      x_offset = new_pos[0] - old_pos[0]
+      y_offset = new_pos[1] - old_pos[1]
+      self.canvas.itemconfig(ID, fill=color, outline=outline)
       self.canvas.move(ID, x_offset, y_offset)
     else:
-      self.canvas.create_line(new_pos[0], new_pos[1], new_pos[0], new_pos[1], tags=ID, width=8, capstyle=ROUND, joinstyle=ROUND, fill=color)
+      self.canvas.create_oval(new_pos[0] - radius, new_pos[1] - radius , new_pos[0] + radius , new_pos[1] + radius, tags=ID, fill=color, outline=outline)
     self.update_gui()
 
-  def draw_mine(self, ID, pos, color):
-    self.canvas.create_line(pos[0], pos[1], pos[0], pos[1], tags=ID, width=20, capstyle=ROUND, joinstyle=ROUND, fill=color)
+  def draw_mine(self, ID, pos, radius, color, outline):
+    data = {'type': 'Display draw mine %s' % ID}
+    ux = pos[0] - radius
+    uy = pos[1] - radius
+    dx = pos[0] + radius
+    dy = pos[1] + radius
+    logging.warning('\033[92mux:\033[0m %d, \033[92muy:\033[0m %d, \033[92mdx:\033[0m %d, \033[92mdy:\033[0m %d' % (ux, uy, dx, dy), extra=data)
+    self.canvas.create_oval(ux, uy, dx, dy, tags=ID, fill=color, outline=outline)
+    self.update_gui()
+
+  def draw_farm(self, ID, pos, radius, color, outline):
+    data = {'type': 'Display draw farm %s' % ID}
+    ux = pos[0] - radius
+    uy = pos[1] - radius
+    dx = pos[0] + radius
+    dy = pos[1] + radius
+    logging.warning('\033[92mux:\033[0m %d, \033[92muy:\033[0m %d, \033[92mdx:\033[0m %d, \033[92mdy:\033[0m %d' % (ux, uy, dx, dy), extra=data)
+    self.canvas.create_oval(ux, uy, dx, dy, tags=ID, fill=color, outline=outline)
     self.update_gui()
 
   def update_gui(self):

@@ -22,9 +22,9 @@ class Playground(object):
     try:
       around = [(utils.directions[direction][0] + position[0], utils.directions[direction][1] + position[1]) \
                 for direction in utils.directions]
-      ants = [self.ants[ant] for ant in self.ants if self.ants[ant].position == position]
-      farms = [self.farms[farm] for farm in self.farms if self.farms[farm].position == position]
-      mines = [self.mines[mine] for mine in self.mines if self.mines[mine].position == position]
+      ants = [self.ants[ant] for ant in self.ants if self.ants[ant].in_range(position)]
+      farms = [self.farms[farm] for farm in self.farms if self.farms[farm].in_range(position)]
+      mines = [self.mines[mine] for mine in self.mines if self.mines[mine].in_range(position)]
     except RuntimeError:
       return self.scan(position)
     return {'ants': ants, 'farms': farms, 'mines': mines}
@@ -41,7 +41,7 @@ class Playground(object):
 
   def add_mine(self, mine):
     data = {'type': 'Playground'}
-    logging.warning('\033[93mAdd mine:\033[0m %s' % mine.ID, extra=data)
+    logging.warning('\033[93mAdd mine:\033[93m %s, \033[93mPosition:\033[0m %s' % (mine.ID, mine.position), extra=data)
     self.mines[mine.ID] = mine
 
   def get_ant(self, ant_id):
