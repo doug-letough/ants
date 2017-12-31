@@ -1,0 +1,103 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module mine</title>
+<meta charset="utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>mine</strong></big></big> (version 1.0.0)</font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/doug/projets/python/ants/mine.py">/home/doug/projets/python/ants/mine.py</a></font></td></tr></table>
+    <p><tt>Provides&nbsp;the&nbsp;<a href="#Mine">Mine</a>&nbsp;class&nbsp;for&nbsp;the&nbsp;ants&nbsp;module.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="config.html">config</a><br>
+<a href="logging.html">logging</a><br>
+</td><td width="25%" valign=top><a href="random.html">random</a><br>
+<a href="utils.html">utils</a><br>
+</td><td width="25%" valign=top><a href="uuid.html">uuid</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="__builtin__.html#object">__builtin__.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="mine.html#Mine">Mine</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Mine">class <strong>Mine</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;<a href="#Mine">Mine</a>&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;is&nbsp;the&nbsp;food&nbsp;source&nbsp;for&nbsp;ants.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Mine-__init__"><strong>__init__</strong></a>(self, position, radius)</dt><dd><tt>-&nbsp;position:&nbsp;The&nbsp;<a href="#Mine">Mine</a>&nbsp;position&nbsp;as&nbsp;a&nbsp;tuple&nbsp;(x,&nbsp;y)<br>
+-&nbsp;radius:&nbsp;The&nbsp;mine&nbsp;radius.&nbsp;This&nbsp;is&nbsp;the&nbsp;display&nbsp;radius&nbsp;and&nbsp;the&nbsp;area&nbsp;where&nbsp;an&nbsp;ant&nbsp;is&nbsp;considered<br>
+in&nbsp;range&nbsp;to&nbsp;pick&nbsp;up&nbsp;some&nbsp;food.</tt></dd></dl>
+
+<dl><dt><a name="Mine-__str__"><strong>__str__</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;string&nbsp;representation&nbsp;of&nbsp;the&nbsp;<a href="#Mine">Mine</a>&nbsp;<a href="__builtin__.html#object">object</a></tt></dd></dl>
+
+<dl><dt><a name="Mine-in_range"><strong>in_range</strong></a>(self, position)</dt><dd><tt>Returns&nbsp;if&nbsp;wheter&nbsp;or&nbsp;not&nbsp;the&nbsp;given&nbsp;position&nbsp;is&nbsp;aside&nbsp;the&nbsp;<a href="#Mine">Mine</a>.<br>
+-&nbsp;Position:&nbsp;A&nbsp;tuple&nbsp;seen&nbsp;as&nbsp;coordinates&nbsp;(x,&nbsp;y)</tt></dd></dl>
+
+<dl><dt><a name="Mine-pick"><strong>pick</strong></a>(self, q, ant_id)</dt><dd><tt>Remove&nbsp;&lt;q&gt;&nbsp;food&nbsp;unit&nbsp;from&nbsp;<a href="#Mine">Mine</a>&nbsp;stock<br>
+-&nbsp;q:&nbsp;An&nbsp;int&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="Mine-to_dict"><strong>to_dict</strong></a>(self)</dt><dd><tt>Returns&nbsp;a&nbsp;dict&nbsp;representation&nbsp;of&nbsp;the&nbsp;<a href="#Mine">Mine</a>&nbsp;<a href="__builtin__.html#object">object</a>.&nbsp;This&nbsp;representation&nbsp;is<br>
+used&nbsp;by&nbsp;the&nbsp;Display&nbsp;workers&nbsp;to&nbsp;display&nbsp;the&nbsp;<a href="#Mine">Mine</a>.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>__author__</strong> = 'Doug Le Tough'<br>
+<strong>__copyright__</strong> = 'Copyright 2017, Doug Le Tough'<br>
+<strong>__credits__</strong> = ['Doug Le Tough']<br>
+<strong>__email__</strong> = 'doug.letough@free.fr'<br>
+<strong>__license__</strong> = 'WTFPL'<br>
+<strong>__maintainer__</strong> = 'Doug Le Tough'<br>
+<strong>__status__</strong> = 'Testing'<br>
+<strong>__version__</strong> = '1.0.0'</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#7799ee">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Author</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#7799ee"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Doug&nbsp;Le&nbsp;Tough</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#7799ee">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Credits</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#7799ee"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">['Doug&nbsp;Le&nbsp;Tough']</td></tr></table>
+</body></html>

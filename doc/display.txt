@@ -1,0 +1,334 @@
+                                                                              
+                                                                              
+   display (version                                                     index
+   1.0.0)                           /home/doug/projets/python/ants/display.py
+
+   Provides Worker and Display classes.
+    
+   NumberList holds a sequence of numbers, and defines several statistical
+   operations (mean, stdev, etc.) FrequencyDistribution holds a mapping from
+   items (not necessarily numbers) to counts, and defines operations such as
+   Shannon entropy and frequency normalization.
+
+          
+   Modules
+            Queue             re          threading         _tkinter          
+            logging           sys         time                                
+
+       
+Classes
+         __builtin__.object                                                                                
+                                                                                                           
+                 Display                                                                                   
+                                                                                                           
+         threading.Thread(threading._Verbose)                                                              
+                                                                                                           
+                 Worker                                                                                    
+                                                                                                           
+                                                                                                           
+         class Display(__builtin__.object)                                                                 
+             The Display object is the main interface to TKInter display.                                  
+             Basically it is a simple Canvas with a frame inside a window.                                 
+                                                                                                           
+             Data processed by workers are displayed inside the canvas.                                    
+                                                                                                           
+               Methods defined here:                                                                       
+                                                                                                           
+               __init__(self, size, max_ants)                                                              
+                  size: The display size. Should be equal to config.PLAYGROUND_SIZE                        
+                  max_ants: The estimated maximum number of ants                                           
+                                                                                                           
+                  Since the number of living ants can not be guessed or guaranted, the max_ants            
+                  is an estimation.                                                                        
+                  It's a good idea to make it equal to config.FARM_INITIAL_FOOD_STOCK.                     
+                                                                                                           
+                  The max_ants value will determine the number of workers created by the Display object.   
+                                                                                                           
+               build_gui(self)                                                                             
+                  Build the GUI with widgets from Tkinter module                                           
+                                                                                                           
+               draw_ant(self, ID, old_pos, new_pos, radius, color, outline)                                
+                  Draw an non existent ant according to data received.                                     
+                  If ant already exists, the ant is moved to new_pos coordinates.                          
+                                                                                                           
+                  ID: The ant ID                                                                           
+                  old_pos: The previous position of this ant                                               
+                  new_pos: The new position where this ant must be displayed                               
+                  radius: The ant radius (Don't touch this: see config.ANT_RADIUS)                         
+                  color: The ant body color                                                                
+                  outline: The ant outline color                                                           
+                                                                                                           
+               draw_farm(self, ID, pos, radius, color, outline)                                            
+                  Draw an non existent farm according to data received.                                    
+                                                                                                           
+                  ID: The farm ID                                                                          
+                  pos: The position of this farm                                                           
+                  radius: The farm radius (see config.FARM_RADIUS)                                         
+                  color: The farm body color (see config.FARM_COLOR)                                       
+                  outline: The mine outline color (see config.FARM_OUTLINE_COLOR)                          
+                                                                                                           
+               draw_mine(self, ID, pos, radius, color, outline)                                            
+                  Draw an non existent mine according to data received.                                    
+                                                                                                           
+                  ID: The mine ID                                                                          
+                  pos: The position of this mine                                                           
+                  radius: The mine radius (see config.MINE_RADIUS)                                         
+                  color: The mine body color (see config.MINE_COLOR)                                       
+                  outline: The mine outline color (see config.MINE_OUTLINE_COLOR)                          
+                                                                                                           
+               get_queue(self)                                                                             
+                  Returns the display queue                                                                
+                                                                                                           
+               start(self)                                                                                 
+                  Start the window main loop of events                                                     
+                                                                                                           
+               update_gui(self)                                                                            
+                  Update the canvas                                                                        
+                                                                                                           
+                 ---------------------------------------------------------------------------------------   
+                                                                                                           
+               Data descriptors defined here:                                                              
+                                                                                                           
+               __dict__                                                                                    
+                  dictionary for instance variables (if defined)                                           
+                                                                                                           
+               __weakref__                                                                                 
+                  list of weak references to the object (if defined)                                       
+                                                                                                           
+                                                                                                           
+         class Worker(threading.Thread)                                                                    
+             The Worker object provides a way to process data found in a queue.                            
+             When data is found, it is parsed and then displayed accordingly.                              
+                                                                                                           
+             The Worker object runs in its own thread.                                                     
+                                                                                                           
+               Method resolution order:                                                                    
+                  Worker                                                                                   
+                  threading.Thread                                                                         
+                  threading._Verbose                                                                       
+                  __builtin__.object                                                                       
+                                                                                                           
+                 ---------------------------------------------------------------------------------------   
+                                                                                                           
+               Methods defined here:                                                                       
+                                                                                                           
+               __init__(self, display, ID, queue)                                                          
+                  display: The display on wich data are displayed                                          
+                  ID: The Worker instance ID                                                               
+                  queue: The FIFO queue where the data have to be collected                                
+                                                                                                           
+               process(self, item)                                                                         
+                  Displays received item.                                                                  
+                  Item must be a dict (JSON like hash)                                                     
+                  Valid data can be one of the 3 following type:                                           
+                  - ant                                                                                    
+                  - farm                                                                                   
+                  - mine                                                                                   
+                                                                                                           
+               run(self)                                                                                   
+                  The Worker thread main loop:                                                             
+                  - Get data from queue and give it to the process method                                  
+                                                                                                           
+               stop(self)                                                                                  
+                  Exit from main loop                                                                      
+                                                                                                           
+                 ---------------------------------------------------------------------------------------   
+                                                                                                           
+               Methods inherited from threading.Thread:                                                    
+                                                                                                           
+               __repr__(self)                                                                              
+                                                                                                           
+               getName(self)                                                                               
+                                                                                                           
+               isAlive(self)                                                                               
+                  Return whether the thread is alive.                                                      
+                                                                                                           
+                  This method returns True just before the run() method starts until just                  
+                  after the run() method terminates. The module function enumerate()                       
+                  returns a list of all alive threads.                                                     
+                                                                                                           
+               isDaemon(self)                                                                              
+                                                                                                           
+               is_alive = isAlive(self)                                                                    
+                  Return whether the thread is alive.                                                      
+                                                                                                           
+                  This method returns True just before the run() method starts until just                  
+                  after the run() method terminates. The module function enumerate()                       
+                  returns a list of all alive threads.                                                     
+                                                                                                           
+               join(self, timeout=None)                                                                    
+                  Wait until the thread terminates.                                                        
+                                                                                                           
+                  This blocks the calling thread until the thread whose join() method is                   
+                  called terminates -- either normally or through an unhandled exception                   
+                  or until the optional timeout occurs.                                                    
+                                                                                                           
+                  When the timeout argument is present and not None, it should be a                        
+                  floating point number specifying a timeout for the operation in seconds                  
+                  (or fractions thereof). As join() always returns None, you must call                     
+                  isAlive() after join() to decide whether a timeout happened -- if the                    
+                  thread is still alive, the join() call timed out.                                        
+                                                                                                           
+                  When the timeout argument is not present or None, the operation will                     
+                  block until the thread terminates.                                                       
+                                                                                                           
+                  A thread can be join()ed many times.                                                     
+                                                                                                           
+                  join() raises a RuntimeError if an attempt is made to join the current                   
+                  thread as that would cause a deadlock. It is also an error to join() a                   
+                  thread before it has been started and attempts to do so raises the same                  
+                  exception.                                                                               
+                                                                                                           
+               setDaemon(self, daemonic)                                                                   
+                                                                                                           
+               setName(self, name)                                                                         
+                                                                                                           
+               start(self)                                                                                 
+                  Start the thread's activity.                                                             
+                                                                                                           
+                  It must be called at most once per thread object. It arranges for the                    
+                  object's run() method to be invoked in a separate thread of control.                     
+                                                                                                           
+                  This method will raise a RuntimeError if called more than once on the                    
+                  same thread object.                                                                      
+                                                                                                           
+                 ---------------------------------------------------------------------------------------   
+                                                                                                           
+               Data descriptors inherited from threading.Thread:                                           
+                                                                                                           
+               daemon                                                                                      
+                  A boolean value indicating whether this thread is a daemon thread (True) or not (False). 
+                                                                                                           
+                  This must be set before start() is called, otherwise RuntimeError is                     
+                  raised. Its initial value is inherited from the creating thread; the                     
+                  main thread is not a daemon thread and therefore all threads created in                  
+                  the main thread default to daemon = False.                                               
+                                                                                                           
+                  The entire Python program exits when no alive non-daemon threads are                     
+                  left.                                                                                    
+                                                                                                           
+               ident                                                                                       
+                  Thread identifier of this thread or None if it has not been started.                     
+                                                                                                           
+                  This is a nonzero integer. See the thread.get_ident() function. Thread                   
+                  identifiers may be recycled when a thread exits and another thread is                    
+                  created. The identifier is available even after the thread has exited.                   
+                                                                                                           
+               name                                                                                        
+                  A string used for identification purposes only.                                          
+                                                                                                           
+                  It has no semantics. Multiple threads may be given the same name. The                    
+                  initial name is set by the constructor.                                                  
+                                                                                                           
+                 ---------------------------------------------------------------------------------------   
+                                                                                                           
+               Data descriptors inherited from threading._Verbose:                                         
+                                                                                                           
+               __dict__                                                                                    
+                  dictionary for instance variables (if defined)                                           
+                                                                                                           
+               __weakref__                                                                                 
+                  list of weak references to the object (if defined)                                       
+
+          
+   Data   
+            ACTIVE = 'active'                                                 
+            ALL = 'all'                                                       
+            ANCHOR = 'anchor'                                                 
+            ARC = 'arc'                                                       
+            BASELINE = 'baseline'                                             
+            BEVEL = 'bevel'                                                   
+            BOTH = 'both'                                                     
+            BOTTOM = 'bottom'                                                 
+            BROWSE = 'browse'                                                 
+            BUTT = 'butt'                                                     
+            CASCADE = 'cascade'                                               
+            CENTER = 'center'                                                 
+            CHAR = 'char'                                                     
+            CHECKBUTTON = 'checkbutton'                                       
+            CHORD = 'chord'                                                   
+            COMMAND = 'command'                                               
+            CURRENT = 'current'                                               
+            DISABLED = 'disabled'                                             
+            DOTBOX = 'dotbox'                                                 
+            E = 'e'                                                           
+            END = 'end'                                                       
+            EW = 'ew'                                                         
+            EXCEPTION = 8                                                     
+            EXTENDED = 'extended'                                             
+            FALSE = 0                                                         
+            FIRST = 'first'                                                   
+            FLAT = 'flat'                                                     
+            GROOVE = 'groove'                                                 
+            HIDDEN = 'hidden'                                                 
+            HORIZONTAL = 'horizontal'                                         
+            INSERT = 'insert'                                                 
+            INSIDE = 'inside'                                                 
+            LAST = 'last'                                                     
+            LEFT = 'left'                                                     
+            MITER = 'miter'                                                   
+            MOVETO = 'moveto'                                                 
+            MULTIPLE = 'multiple'                                             
+            N = 'n'                                                           
+            NE = 'ne'                                                         
+            NO = 0                                                            
+            NONE = 'none'                                                     
+            NORMAL = 'normal'                                                 
+            NS = 'ns'                                                         
+            NSEW = 'nsew'                                                     
+            NUMERIC = 'numeric'                                               
+            NW = 'nw'                                                         
+            OFF = 0                                                           
+            ON = 1                                                            
+            OUTSIDE = 'outside'                                               
+            PAGES = 'pages'                                                   
+            PIESLICE = 'pieslice'                                             
+            PROJECTING = 'projecting'                                         
+            RADIOBUTTON = 'radiobutton'                                       
+            RAISED = 'raised'                                                 
+            READABLE = 2                                                      
+            RIDGE = 'ridge'                                                   
+            RIGHT = 'right'                                                   
+            ROUND = 'round'                                                   
+            S = 's'                                                           
+            SCROLL = 'scroll'                                                 
+            SE = 'se'                                                         
+            SEL = 'sel'                                                       
+            SEL_FIRST = 'sel.first'                                           
+            SEL_LAST = 'sel.last'                                             
+            SEPARATOR = 'separator'                                           
+            SINGLE = 'single'                                                 
+            SOLID = 'solid'                                                   
+            SUNKEN = 'sunken'                                                 
+            SW = 'sw'                                                         
+            StringTypes = (<type 'str'>, <type 'unicode'>)                    
+            TOP = 'top'                                                       
+            TRUE = 1                                                          
+            TclVersion = 8.6                                                  
+            TkVersion = 8.6                                                   
+            UNDERLINE = 'underline'                                           
+            UNITS = 'units'                                                   
+            VERTICAL = 'vertical'                                             
+            W = 'w'                                                           
+            WORD = 'word'                                                     
+            WRITABLE = 4                                                      
+            X = 'x'                                                           
+            Y = 'y'                                                           
+            YES = 1                                                           
+            __author__ = 'Doug Le Tough'                                      
+            __copyright__ = 'Copyright 2017, Doug Le Tough'                   
+            __credits__ = ['Doug Le Tough']                                   
+            __email__ = 'doug.letough@free.fr'                                
+            __license__ = 'WTFPL'                                             
+            __maintainer__ = 'Doug Le Tough'                                  
+            __status__ = 'Testing'                                            
+            __version__ = '1.0.0'                                             
+            wantobjects = 1                                                   
+
+                      
+   Author             
+                          Doug Le Tough                                       
+
+                      
+   Credits            
+                          ['Doug Le Tough']                                   

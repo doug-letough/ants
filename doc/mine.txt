@@ -1,0 +1,72 @@
+                                                                              
+                                                                              
+   mine (version                                                        index
+   1.0.0)                              /home/doug/projets/python/ants/mine.py
+
+   Provides the Mine class for the ants module.
+
+              
+   Modules    
+                 config                  random               uuid            
+                 logging                 utils                                
+
+       
+Classes
+         __builtin__.object                                                                                     
+                                                                                                                
+                 Mine                                                                                           
+                                                                                                                
+                                                                                                                
+         class Mine(__builtin__.object)                                                                         
+             The Mine object is the food source for ants.                                                       
+                                                                                                                
+               Methods defined here:                                                                            
+                                                                                                                
+               __init__(self, position, radius)                                                                 
+                  - position: The Mine position as a tuple (x, y)                                               
+                  - radius: The mine radius. This is the display radius and the area where an ant is considered 
+                  in range to pick up some food.                                                                
+                                                                                                                
+               __str__(self)                                                                                    
+                  Returns the string representation of the Mine object                                          
+                                                                                                                
+               in_range(self, position)                                                                         
+                  Returns if wheter or not the given position is aside the Mine.                                
+                  - Position: A tuple seen as coordinates (x, y)                                                
+                                                                                                                
+               pick(self, q, ant_id)                                                                            
+                  Remove <q> food unit from Mine stock                                                          
+                  - q: An int value                                                                             
+                                                                                                                
+               to_dict(self)                                                                                    
+                  Returns a dict representation of the Mine object. This representation is                      
+                  used by the Display workers to display the Mine.                                              
+                                                                                                                
+                 --------------------------------------------------------------------------------------------   
+                                                                                                                
+               Data descriptors defined here:                                                                   
+                                                                                                                
+               __dict__                                                                                         
+                  dictionary for instance variables (if defined)                                                
+                                                                                                                
+               __weakref__                                                                                      
+                  list of weak references to the object (if defined)                                            
+
+          
+   Data   
+            __author__ = 'Doug Le Tough'                                      
+            __copyright__ = 'Copyright 2017, Doug Le Tough'                   
+            __credits__ = ['Doug Le Tough']                                   
+            __email__ = 'doug.letough@free.fr'                                
+            __license__ = 'WTFPL'                                             
+            __maintainer__ = 'Doug Le Tough'                                  
+            __status__ = 'Testing'                                            
+            __version__ = '1.0.0'                                             
+
+                      
+   Author             
+                          Doug Le Tough                                       
+
+                      
+   Credits            
+                          ['Doug Le Tough']                                   

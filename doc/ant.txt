@@ -1,0 +1,225 @@
+                                                                              
+                                                                        index 
+   ant (version 1.0.0)                  /home/doug/projets/python/ants/ant.py
+
+   Provides the Ant class for the ants module.
+
+          
+   Modules
+            config   multiprocessing                        threading  utils  
+            logging  random                                 time       uuid   
+
+       
+Classes
+         threading.Thread(threading._Verbose)                                                                                    
+                                                                                                                                 
+                 Ant                                                                                                             
+                                                                                                                                 
+                                                                                                                                 
+         class Ant(threading.Thread)                                                                                             
+             The Ant object is a self living virtual creature that tries to simulate                                             
+             some ant's basic behaviour.                                                                                         
+             The Ant object runs its own thread.                                                                                 
+                                                                                                                                 
+               Method resolution order:                                                                                          
+                  Ant                                                                                                            
+                  threading.Thread                                                                                               
+                  threading._Verbose                                                                                             
+                  __builtin__.object                                                                                             
+                                                                                                                                 
+                 -------------------------------------------------------------------------------------------------------------   
+                                                                                                                                 
+               Methods defined here:                                                                                             
+                                                                                                                                 
+               __init__(self, playground, display_q, position, farm_id)                                                          
+                  - playground: The Playground in which the Ant lives                                                            
+                  - display_q: The FIFO queue in wich data are sent to the Display object                                        
+                  - position: A tuple seen as initial position (x, y)                                                            
+                  - farm_id: The Farm ID to which the Ant belongs                                                                
+                                                                                                                                 
+               __str__(self)                                                                                                     
+                  Returns a string representation of the Ant.                                                                    
+                                                                                                                                 
+               check_around(self)                                                                                                
+                  Process actions according to what is around the present position.                                              
+                  Object around the present position are given bay the Playground.scan(position) method.                         
+                                                                                                                                 
+               clean_history(self)                                                                                               
+                  Delete oldest position in history when history length is larger than <max_history>.                            
+                  See config.ANT_MAX_HISTORY                                                                                     
+                                                                                                                                 
+               hail(self, ant)                                                                                                   
+                  Hails the given Ant.                                                                                           
+                  Whenever an Ant encounter an another, it hails it.                                                             
+                  Depending on the status of each the concerned Ants, some data are exchanged.                                   
+                  An Ant can not hail a dead Ant.                                                                                
+                                                                                                                                 
+               in_range(self, position)                                                                                          
+                  Returns if wheter or not the given position is aside the Ant.                                                  
+                  - Position: A tuple seen as coordinates (x, y)                                                                 
+                                                                                                                                 
+               kill(self)                                                                                                        
+                  Kill the Ant.                                                                                                  
+                  this will exit the Ant thread.                                                                                 
+                                                                                                                                 
+               mine(self, mine)                                                                                                  
+                  Pick the maximum food amount from the given mine.                                                              
+                                                                                                                                 
+               pop_new_position(self)                                                                                            
+                  Pick the next position in the path to go.                                                                      
+                                                                                                                                 
+               record(self)                                                                                                      
+                  Record the actual position in the Ant history.                                                                 
+                  For each new record, the history is recreated in a way that the shortest path                                  
+                  from the oldest position to the current position is retained.                                                  
+                  Still, the new shortest path will only use position wihin the history.                                         
+                  The shortest path from within the history is not always (never ?) the shortest path on the play ground.        
+                                                                                                                                 
+               run(self)                                                                                                         
+                  The Ant thread main loop                                                                                       
+                                                                                                                                 
+               set_colors(self)                                                                                                  
+                  Adjust the Ant colors depending on the Ant status.                                                             
+                                                                                                                                 
+               set_new_position(self)                                                                                            
+                  Set a new position from the actual position.                                                                   
+                  A new position is randomly generated by adding -1, 0 or 1 to one of                                            
+                  the actual position componant (x or y).                                                                        
+                  If the new position is out of the playground then the position is                                              
+                  adjusted. Thus an ant can not walk out of the play ground which is finite.                                     
+                                                                                                                                 
+               store(self, farm)                                                                                                 
+                  Stores the carried food to the given farm.                                                                     
+                                                                                                                                 
+               swap_histories(self)                                                                                              
+                  Swap history and path to go.                                                                                   
+                  When an Ant find food, it needs to go back home.                                                               
+                  The partial or complete path to home is in its history so the history is reverted then given has a path to go. 
+                  Once the path to go is set, the actual history is wiped out.                                                   
+                  Same process occurs when an Ant comes back to home with food, so it can go back to the Mine.                   
+                                                                                                                                 
+               to_dict(self)                                                                                                     
+                  Returns a dict representation of the Ant object. This representation is                                        
+                  used by the Display workers to display the Ant.                                                                
+                                                                                                                                 
+               walk(self)                                                                                                        
+                  Set a new position.                                                                                            
+                  If Ant already has a path to go, then the next position is picked up from this path.                           
+                  Otherwise, a new position is randomly picked up.                                                               
+                                                                                                                                 
+                 -------------------------------------------------------------------------------------------------------------   
+                                                                                                                                 
+               Methods inherited from threading.Thread:                                                                          
+                                                                                                                                 
+               __repr__(self)                                                                                                    
+                                                                                                                                 
+               getName(self)                                                                                                     
+                                                                                                                                 
+               isAlive(self)                                                                                                     
+                  Return whether the thread is alive.                                                                            
+                                                                                                                                 
+                  This method returns True just before the run() method starts until just                                        
+                  after the run() method terminates. The module function enumerate()                                             
+                  returns a list of all alive threads.                                                                           
+                                                                                                                                 
+               isDaemon(self)                                                                                                    
+                                                                                                                                 
+               is_alive = isAlive(self)                                                                                          
+                  Return whether the thread is alive.                                                                            
+                                                                                                                                 
+                  This method returns True just before the run() method starts until just                                        
+                  after the run() method terminates. The module function enumerate()                                             
+                  returns a list of all alive threads.                                                                           
+                                                                                                                                 
+               join(self, timeout=None)                                                                                          
+                  Wait until the thread terminates.                                                                              
+                                                                                                                                 
+                  This blocks the calling thread until the thread whose join() method is                                         
+                  called terminates -- either normally or through an unhandled exception                                         
+                  or until the optional timeout occurs.                                                                          
+                                                                                                                                 
+                  When the timeout argument is present and not None, it should be a                                              
+                  floating point number specifying a timeout for the operation in seconds                                        
+                  (or fractions thereof). As join() always returns None, you must call                                           
+                  isAlive() after join() to decide whether a timeout happened -- if the                                          
+                  thread is still alive, the join() call timed out.                                                              
+                                                                                                                                 
+                  When the timeout argument is not present or None, the operation will                                           
+                  block until the thread terminates.                                                                             
+                                                                                                                                 
+                  A thread can be join()ed many times.                                                                           
+                                                                                                                                 
+                  join() raises a RuntimeError if an attempt is made to join the current                                         
+                  thread as that would cause a deadlock. It is also an error to join() a                                         
+                  thread before it has been started and attempts to do so raises the same                                        
+                  exception.                                                                                                     
+                                                                                                                                 
+               setDaemon(self, daemonic)                                                                                         
+                                                                                                                                 
+               setName(self, name)                                                                                               
+                                                                                                                                 
+               start(self)                                                                                                       
+                  Start the thread's activity.                                                                                   
+                                                                                                                                 
+                  It must be called at most once per thread object. It arranges for the                                          
+                  object's run() method to be invoked in a separate thread of control.                                           
+                                                                                                                                 
+                  This method will raise a RuntimeError if called more than once on the                                          
+                  same thread object.                                                                                            
+                                                                                                                                 
+                 -------------------------------------------------------------------------------------------------------------   
+                                                                                                                                 
+               Data descriptors inherited from threading.Thread:                                                                 
+                                                                                                                                 
+               daemon                                                                                                            
+                  A boolean value indicating whether this thread is a daemon thread (True) or not (False).                       
+                                                                                                                                 
+                  This must be set before start() is called, otherwise RuntimeError is                                           
+                  raised. Its initial value is inherited from the creating thread; the                                           
+                  main thread is not a daemon thread and therefore all threads created in                                        
+                  the main thread default to daemon = False.                                                                     
+                                                                                                                                 
+                  The entire Python program exits when no alive non-daemon threads are                                           
+                  left.                                                                                                          
+                                                                                                                                 
+               ident                                                                                                             
+                  Thread identifier of this thread or None if it has not been started.                                           
+                                                                                                                                 
+                  This is a nonzero integer. See the thread.get_ident() function. Thread                                         
+                  identifiers may be recycled when a thread exits and another thread is                                          
+                  created. The identifier is available even after the thread has exited.                                         
+                                                                                                                                 
+               name                                                                                                              
+                  A string used for identification purposes only.                                                                
+                                                                                                                                 
+                  It has no semantics. Multiple threads may be given the same name. The                                          
+                  initial name is set by the constructor.                                                                        
+                                                                                                                                 
+                 -------------------------------------------------------------------------------------------------------------   
+                                                                                                                                 
+               Data descriptors inherited from threading._Verbose:                                                               
+                                                                                                                                 
+               __dict__                                                                                                          
+                  dictionary for instance variables (if defined)                                                                 
+                                                                                                                                 
+               __weakref__                                                                                                       
+                  list of weak references to the object (if defined)                                                             
+
+          
+   Data   
+            __author__ = 'Doug Le Tough'                                      
+            __copyright__ = 'Copyright 2017, Doug Le Tough'                   
+            __credits__ = ['Doug Le Tough']                                   
+            __email__ = 'doug.letough@free.fr'                                
+            __license__ = 'WTFPL'                                             
+            __maintainer__ = 'Doug Le Tough'                                  
+            __status__ = 'Testing'                                            
+            __version__ = '1.0.0'                                             
+
+                      
+   Author             
+                          Doug Le Tough                                       
+
+                      
+   Credits            
+                          ['Doug Le Tough']                                   

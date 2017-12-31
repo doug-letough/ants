@@ -1,0 +1,52 @@
+                                                                              
+                                                                              
+   config (version                                                      index
+   1.0.0)                            /home/doug/projets/python/ants/config.py
+
+   Provides basic configuration for the Ants application.
+
+                      
+   Modules            
+                          logging                                             
+
+          
+   Data   
+            ANT_BUSY_OUTLINE_COLOR = '#0000FF'                                
+            ANT_HOMING_COLOR = '#00FF00'                                      
+            ANT_HUNTING_COLOR = '#FF0000'                                     
+            ANT_LOST_OUTLINE_COLOR = '#FFFF00'                                
+            ANT_MAX_FOOD = 5                                                  
+            ANT_MAX_HISTORY = 300                                             
+            ANT_MAX_LIFE = 100000                                             
+            ANT_NEUTRAL_OUTLINE_COLOR = '#FFFFFF'                             
+            ANT_RADIUS = 1                                                    
+            FARM_COLOR = '#4B1BB4'                                            
+            FARM_GROWTH_RATE = 60                                             
+            FARM_INITIAL_FOOD_STOCK = 100                                     
+            FARM_OUTLINE_COLOR = '#FFFFFF'                                    
+            FARM_POS = (300, 300)                                             
+            FARM_RADIUS = 20                                                  
+            FARM_SURVIVAL_TIMEOUT = 10                                        
+            FORMAT = '%(asctime)-15s: \x1b[95m%(type)-10s:\x1b[0m             
+            %(message)s'                                                      
+            MINE_COLOR = '#EF26AD'                                            
+            MINE_INITIAL_STOCK = 1000                                         
+            MINE_OUTLINE_COLOR = '#FFFFFF'                                    
+            MINE_RADIUS = 20                                                  
+            PLAYGROUND_SIZE = (600, 600)                                      
+            __author__ = 'Doug Le Tough'                                      
+            __copyright__ = 'Copyright 2017, Doug Le Tough'                   
+            __credits__ = ['Doug Le Tough']                                   
+            __email__ = 'doug.letough@free.fr'                                
+            __license__ = 'WTFPL'                                             
+            __maintainer__ = 'Doug Le Tough'                                  
+            __status__ = 'Testing'                                            
+            __version__ = '1.0.0'                                             
+
+                      
+   Author             
+                          Doug Le Tough                                       
+
+                      
+   Credits            
+                          ['Doug Le Tough']                                   

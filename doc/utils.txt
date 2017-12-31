@@ -1,0 +1,40 @@
+                                                                              
+                                                                              
+   utils (version                                                       index
+   1.0.0)                             /home/doug/projets/python/ants/utils.py
+
+   Provides common methods useful to the ants module.
+
+                      
+   Modules            
+                          random                                              
+
+         
+  Functions
+           gen_color()                                                           
+              Returns a randomly generated hexadecimal color value (HTML style). 
+                                                                                 
+           random_dir()                                                          
+              Randomly returns one of the direction values.                      
+              Directions values are: -1, 0, 1                                    
+
+          
+   Data   
+            __author__ = 'Doug Le Tough'                                      
+            __copyright__ = 'Copyright 2017, Doug Le Tough'                   
+            __credits__ = ['Doug Le Tough']                                   
+            __email__ = 'doug.letough@free.fr'                                
+            __license__ = 'WTFPL'                                             
+            __maintainer__ = 'Doug Le Tough'                                  
+            __status__ = 'Testing'                                            
+            __version__ = '1.0.0'                                             
+            directions = {0: [0, 0], 1: [1, 0], 2: [-1, 0], 3: [0, -1], 4:    
+            [0, 1], 5: [-1, 1], 6: [1, 1], 7: [1, -1], 8: [-1, -1]}           
+
+                      
+   Author             
+                          Doug Le Tough                                       
+
+                      
+   Credits            
+                          ['Doug Le Tough']                                   

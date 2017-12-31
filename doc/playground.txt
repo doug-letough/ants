@@ -1,0 +1,81 @@
+                                                                              
+                                                                              
+   playground                                                           index
+   (version 1.0.0)               /home/doug/projets/python/ants/playground.py
+
+   Provides the Playground class which is the sandbox where
+   ants are living.
+
+          
+   Modules
+            Queue                 multiprocessing          utils              
+            logging               threading                                   
+
+       
+Classes
+         __builtin__.object                                                           
+                                                                                      
+                 Playground                                                           
+                                                                                      
+                                                                                      
+         class Playground(__builtin__.object)                                         
+             The Playground class provides the eco-system within ants are living.     
+             - size is a tuple seen as a dimension (width, height).                   
+                                                                                      
+               Methods defined here:                                                  
+                                                                                      
+               __init__(self, size)                                                   
+                                                                                      
+               add_ant(self, ant)                                                     
+                  Add ant to the playground ant collection                            
+                                                                                      
+               add_farm(self, farm)                                                   
+                  Add farm to the playground farm collection                          
+                                                                                      
+               add_mine(self, mine)                                                   
+                  Add mine to the playground mine collection                          
+                                                                                      
+               get_ant(self, ant_id)                                                  
+                  Returns the ant which ID is given.                                  
+                  Returns None if no ant in the ant collection has the given ID       
+                                                                                      
+               get_farm(self, farm_id)                                                
+                  Returns the farm which ID is given.                                 
+                  Returns None if no farm in the farm collection has the given ID     
+                                                                                      
+               get_mine(self, mine_id)                                                
+                  Returns the mine which ID is given.                                 
+                  Returns None if no mine in the mine collection has the given ID     
+                                                                                      
+               scan(self, position)                                                   
+                  Returns all objects (ants, farms, mines) nearby the given position. 
+                  - position is a tupe seen as coordinates (x, y)                     
+                                                                                      
+                 ------------------------------------------------------------------   
+                                                                                      
+               Data descriptors defined here:                                         
+                                                                                      
+               __dict__                                                               
+                  dictionary for instance variables (if defined)                      
+                                                                                      
+               __weakref__                                                            
+                  list of weak references to the object (if defined)                  
+
+          
+   Data   
+            __author__ = 'Doug Le Tough'                                      
+            __copyright__ = 'Copyright 2017, Doug Le Tough'                   
+            __credits__ = ['Doug Le Tough']                                   
+            __email__ = 'doug.letough@free.fr'                                
+            __license__ = 'WTFPL'                                             
+            __maintainer__ = 'Doug Le Tough'                                  
+            __status__ = 'Testing'                                            
+            __version__ = '1.0.0'                                             
+
+                      
+   Author             
+                          Doug Le Tough                                       
+
+                      
+   Credits            
+                          ['Doug Le Tough']                                   
