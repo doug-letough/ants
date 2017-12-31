@@ -48,15 +48,16 @@ As it uses python 2.7 standard modules only it may run on Windows or MacOS.
 Clone the Github repository with the followning command
 
 ```
-$ git clone  ants
+$ git clone https://github.com/doug-letough/ants.git ants
 ```
 
 
-## Run the Ants module
+## Run the Ants application
 
-From within the ants module directory, run the followinf command
+Run the following commands
 
 ```
+$ cd ants
 $ python -m ants
 ```
 
