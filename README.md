@@ -17,31 +17,30 @@ As it uses python 2.7 standard modules only it may run on Windows or MacOS.
 ## Content
 
 * ./README.md
+* ./LICENSE.TXT
 * ./screenshot.png
-* ./playground.py
+* ./ants.py
+* ./ant.py
 * ./config.py
+* ./display.py
 * ./farm.py
 * ./mine.py
-* ./ant.py
-* ./LICENSE.TXT
-* ./url.txt
-* ./ants.py
-* ./display.py
+* ./playground.py
 * ./utils.py
-* ./doc/playground.html
 * ./doc/ant.html
-* ./doc/farm.html
-* ./doc/mine.html
-* ./doc/display.txt
-* ./doc/farm.txt
-* ./doc/config.txt
-* ./doc/mine.txt
-* ./doc/config.html
 * ./doc/ant.txt
-* ./doc/utils.html
-* ./doc/playground.txt
-* ./doc/utils.txt
+* ./doc/config.html
+* ./doc/config.txt
 * ./doc/display.html
+* ./doc/display.txt
+* ./doc/farm.html
+* ./doc/farm.txt
+* ./doc/mine.html
+* ./doc/mine.txt
+* ./doc/playground.html
+* ./doc/playground.txt
+* ./doc/utils.html
+* ./doc/utils.txt
 
 
 ## Goal
