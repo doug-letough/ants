@@ -47,7 +47,7 @@ As it uses python 2.7 standard modules only it may run on Windows or MacOS.
 
 This programm tries to demonstrate that ants **may** have a life based on random and basic reflexes only.
 
-It also provides a way to understand multithead programming in python.
+It also provides a way to understand python multi-thread programming.
 
 This project is **not** a science project.
 
