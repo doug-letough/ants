@@ -1,1 +1,0 @@
-https://pysdl2.readthedocs.io/en/rel_0_9_6/tutorial/index.html
