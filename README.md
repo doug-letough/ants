@@ -75,7 +75,7 @@ For all details on objects and there method and attributes, see all files in the
 
 ## TODO
 
-* -A convenient way to close the application and all its threads (See 'Run the application') !-
+* --A convenient way to close the application and all its threads (See 'Run the application') !--
 * Multiple farms on same map
 * War between different ant factions
 * Ant subclasses (worker, warrior, ...)
