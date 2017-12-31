@@ -102,6 +102,7 @@ $ git clone https://github.com/doug-letough/ants.git ants
 
 You'll find a bunch of parameters to play with in the application configuration file **config.py**.
 
+Default values will do fine.
 
 ## Run the Ants application
 
@@ -139,8 +140,3 @@ This will still display the log to stderr and log this output to the ants.log fi
 ## Uninstall
 
 Simply remove the module directory. 
-
-
-## Configuration
-
-The configuration of this application is done by modifing
