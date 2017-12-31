@@ -44,9 +44,33 @@ As it uses python 2.7 standard modules only it may run on Windows or MacOS.
 ./doc/display.html
 
 
+## Goal
+
+This programm tries to demonstrate that ants **may** have a life based on random and basic reflexes only.
+
+It also provides a way to understand multithead programming in python.
+
+This project is **not** a science project.
+
+
+## API and documentation
+
+See ./doc
+
+
+## TODO
+
+* A convenient way to close the application and all its threads (See 'Run the application') !
+* Multiple farms on same map
+* War between different ant factions
+* Ant subclasses (worker, warrior, ...)
+* Allow swarming when farm reach a number of individuals
+* SDL2 implementation
+
 ## Install from file:
 
 * Copy the module directory in any directory of your home dir.
+
 
 ## Install from github
 
@@ -87,9 +111,6 @@ $ python -m ants 2>&1 | tee -a ants.log
 
 This will still display the log to stderr and log this output to the ants.log file.
 
-## API documentation
-
-See ./documentation
 
 ## Uninstall
 
