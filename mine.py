@@ -81,3 +81,7 @@ class Mine(object):
     logging.warning('\033[92mAnt:\033[0m %s \033[92mmined:\033[0m %d' % (ant_id, q), extra=self.data)
     if self.stock == 0:
       logging.warning('\033[91mStock:\033[0m %d' % self.stock, extra=self.data)
+
+  def stop(self):
+    """ Actually do nothing"""
+    logging.warning('\033[91mKilled\033[0m', extra=self.data)

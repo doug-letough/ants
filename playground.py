@@ -24,15 +24,77 @@ __status__ = "Testing"
 # Playground
 ###################################################################################################################
 
+
+class Worker(threading.Thread):
+  """ The Worker object provides a way to process data found in a queue.
+      When data is found, the corresponding object is killed.
+
+      The Worker object runs in its own thread.
+  """
+  def __init__(self, ants, farms, mines, queue):
+    """
+    ants: The ant collection
+    farms: The farm collection
+    mines: The mine collection
+    queue: The FIFO queue where the data have to be collected
+    """
+    threading.Thread.__init__(self)
+    self.ants = ants
+    self.mines = mines
+    self.farms = farms
+    self.queue = queue
+    self.active = True
+    self.data = {'type': 'Playground worker'}
+
+  def run(self):
+    """
+    The Worker thread main loop:
+    - Get data from queue and give it to the process method
+    """
+    logging.warning('\033[93mReport status:\033[0m \033[92mActive:\033[0m %s' % self.active, extra=self.data)
+    while self.active:
+      item = self.queue.get()
+      self.process(item)
+    logging.warning('\033[93mReport status:\033[0m \033[92mActive:\033[0m %s' % self.active, extra=self.data)
+
+  def process(self, item):
+    """
+    Displays received item.
+    Item must be a dict (JSON like hash)
+    Valid data can be one of the 3 following type:
+    - ant
+    - farm
+    - mine
+    """
+    if item['type'] == 'kill':
+      logging.warning('\033[93mKill signal:\033[0m Received', extra=self.data)
+      for farm in self.farms:
+        self.farms[farm].stop()
+      for mine in self.mines:
+        self.mines[mine].stop()
+      for ant in self.ants:
+        self.ants[ant].stop()
+    self.stop()
+
+  def stop(self):
+    """
+    Exit from main loop
+    """
+    self.active = False
+
+
 class Playground(object):
   """ The Playground class provides the eco-system within ants are living.
   - size is a tuple seen as a dimension (width, height).
   """
-  def __init__(self, size):
+  def __init__(self, size, response_q):
     self.width, self.height = size
+    self.response_q = response_q
     self.ants = {}
     self.farms = {}
     self.mines = {}
+    self.worker = Worker(self.ants, self.farms, self.mines, self.response_q)
+    self.worker.start()
     self.data = {'type': 'Playground'}
 
   def scan(self, position):

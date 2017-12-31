@@ -10,7 +10,6 @@ import farm
 import mine
 import playground
 import display
-import Queue
 import logging
 import random
 import utils
@@ -32,9 +31,11 @@ if __name__ == '__main__':
   # The display
   disp = display.Display(config.PLAYGROUND_SIZE, config.FARM_INITIAL_FOOD_STOCK)
   # The FIFO queue to communicate with display
-  display_q = disp.get_queue()
+  display_q = disp.get_display_queue()
+  # The queue needed to have response back from display to playground
+  response_q = disp.get_response_queue()
   # Create play ground
-  ground = playground.Playground(config.PLAYGROUND_SIZE)
+  ground = playground.Playground(config.PLAYGROUND_SIZE, response_q)
   # Create a food mine
   mine_position = (int(config.FARM_POS[0] + 110), int(config.FARM_POS[1] + 110))
   mine = mine.Mine(mine_position, config.MINE_RADIUS)

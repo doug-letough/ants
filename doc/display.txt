@@ -12,8 +12,8 @@
 
           
    Modules
-            Queue             re          threading         _tkinter          
-            logging           sys         time                                
+            Queue           logging         sys              time             
+            atexit          re              threading        _tkinter         
 
        
 Classes
@@ -76,11 +76,17 @@ Classes
                   color: The mine body color (see config.MINE_COLOR)                                       
                   outline: The mine outline color (see config.MINE_OUTLINE_COLOR)                          
                                                                                                            
-               get_queue(self)                                                                             
+               get_display_queue(self)                                                                     
                   Returns the display queue                                                                
+                                                                                                           
+               get_response_queue(self)                                                                    
+                  Returns the response queue                                                               
                                                                                                            
                start(self)                                                                                 
                   Start the window main loop of events                                                     
+                                                                                                           
+               stop(self)                                                                                  
+                  Send stop signal to all objects (ants, farms, mines, workers)                            
                                                                                                            
                update_gui(self)                                                                            
                   Update the canvas                                                                        

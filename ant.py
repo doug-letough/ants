@@ -278,7 +278,7 @@ class Ant(threading.Thread):
     """ Wait time seconds """
     time.sleep(delay)
 
-  def kill(self):
+  def stop(self):
     """ Kill the Ant.
     this will exit the Ant thread. """
     self.life = 0

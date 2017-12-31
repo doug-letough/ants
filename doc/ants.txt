@@ -1,0 +1,31 @@
+                                                                              
+                                                                              
+   ants (version                                                        index
+   1.0.0)                              /home/doug/projets/python/ants/ants.py
+
+   The ants module entry point.
+
+          
+   Modules
+            ant                   farm                 playground             
+            config                logging              random                 
+            display               mine                 utils                  
+
+          
+   Data   
+            __author__ = 'Doug Le Tough'                                      
+            __copyright__ = 'Copyright 2017, Doug Le Tough'                   
+            __credits__ = ['Doug Le Tough']                                   
+            __email__ = 'doug.letough@free.fr'                                
+            __license__ = 'WTFPL'                                             
+            __maintainer__ = 'Doug Le Tough'                                  
+            __status__ = 'Testing'                                            
+            __version__ = '1.0.0'                                             
+
+                      
+   Author             
+                          Doug Le Tough                                       
+
+                      
+   Credits            
+                          ['Doug Le Tough']                                   

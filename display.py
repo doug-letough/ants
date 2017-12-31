@@ -14,6 +14,7 @@ import Queue
 import threading
 import logging
 import time
+import atexit
 
 __author__ = "Doug Le Tough"
 __copyright__ = "Copyright 2017, Doug Le Tough"
@@ -56,8 +57,11 @@ class Worker(threading.Thread):
     """
     logging.warning('\033[93mReport status:\033[0m \033[92mActive:\033[0m %s' % self.active, extra=self.data)
     while self.active:
-      item = self.queue.get()
-      self.process(item)
+      try:
+        item = self.queue.get(False)
+        self.process(item)
+      except Queue.Empty:
+        pass
     logging.warning('\033[93mReport status:\033[0m \033[92mActive:\033[0m %s' % self.active, extra=self.data)
 
   def process(self, item):
@@ -103,10 +107,13 @@ class Display(object):
     # The display queue. Workers will write to it.
     self.data = {'type': 'Display'}
     self.display_q = Queue.Queue()
+    self.response_q = Queue.Queue()
     self.width, self.height = size
     # The main Tk window
     self.master = Tk()
     self.workers = {}
+    # Register the stop() method with atexit module
+    self.master.protocol("WM_DELETE_WINDOW", self.stop)
     # Create all needed workers
     for w in xrange(max_ants):
       self.workers[w] = Worker(self, w, self.display_q)
@@ -116,9 +123,13 @@ class Display(object):
     # Update the display
     self.update_gui()
 
-  def get_queue(self):
+  def get_display_queue(self):
     """ Returns the display queue"""
     return self.display_q
+
+  def get_response_queue(self):
+    """ Returns the response queue"""
+    return self.response_q
 
   def build_gui(self):
     """ Build the GUI with widgets from Tkinter module """
@@ -199,3 +210,13 @@ class Display(object):
   def start(self):
     """ Start the window main loop of events """
     self.master.mainloop()
+
+  def stop(self):
+    """ Send stop signal to all objects (ants, farms, mines, workers)"""
+    logging.warning('\033[93mSending kill signal\033[0m', extra=self.data)
+    self.response_q.put({'type': 'kill'})
+    for worker in self.workers:
+      self.workers[worker].stop()
+    self.master.destroy()
+    logging.warning('\033[93mExiting\033[0m', extra=self.data)
+    exit(0)

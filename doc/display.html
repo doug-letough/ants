@@ -24,12 +24,13 @@ Shannon&nbsp;entropy&nbsp;and&nbsp;frequency&nbsp;normalization.</tt></p>
     
 <tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="Queue.html">Queue</a><br>
-<a href="logging.html">logging</a><br>
-</td><td width="25%" valign=top><a href="re.html">re</a><br>
-<a href="sys.html">sys</a><br>
-</td><td width="25%" valign=top><a href="threading.html">threading</a><br>
-<a href="time.html">time</a><br>
-</td><td width="25%" valign=top><a href="_tkinter.html">_tkinter</a><br>
+<a href="atexit.html">atexit</a><br>
+</td><td width="25%" valign=top><a href="logging.html">logging</a><br>
+<a href="re.html">re</a><br>
+</td><td width="25%" valign=top><a href="sys.html">sys</a><br>
+<a href="threading.html">threading</a><br>
+</td><td width="25%" valign=top><a href="time.html">time</a><br>
+<a href="_tkinter.html">_tkinter</a><br>
 </td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ee77aa">
@@ -101,9 +102,13 @@ radius:&nbsp;The&nbsp;mine&nbsp;radius&nbsp;(see&nbsp;config.MINE_RADIUS)<br>
 color:&nbsp;The&nbsp;mine&nbsp;body&nbsp;color&nbsp;(see&nbsp;config.MINE_COLOR)<br>
 outline:&nbsp;The&nbsp;mine&nbsp;outline&nbsp;color&nbsp;(see&nbsp;config.MINE_OUTLINE_COLOR)</tt></dd></dl>
 
-<dl><dt><a name="Display-get_queue"><strong>get_queue</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;display&nbsp;queue</tt></dd></dl>
+<dl><dt><a name="Display-get_display_queue"><strong>get_display_queue</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;display&nbsp;queue</tt></dd></dl>
+
+<dl><dt><a name="Display-get_response_queue"><strong>get_response_queue</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;response&nbsp;queue</tt></dd></dl>
 
 <dl><dt><a name="Display-start"><strong>start</strong></a>(self)</dt><dd><tt>Start&nbsp;the&nbsp;window&nbsp;main&nbsp;loop&nbsp;of&nbsp;events</tt></dd></dl>
+
+<dl><dt><a name="Display-stop"><strong>stop</strong></a>(self)</dt><dd><tt>Send&nbsp;stop&nbsp;signal&nbsp;to&nbsp;all&nbsp;objects&nbsp;(ants,&nbsp;farms,&nbsp;mines,&nbsp;workers)</tt></dd></dl>
 
 <dl><dt><a name="Display-update_gui"><strong>update_gui</strong></a>(self)</dt><dd><tt>Update&nbsp;the&nbsp;canvas</tt></dd></dl>
 

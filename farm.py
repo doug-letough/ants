@@ -87,7 +87,7 @@ class Farm(threading.Thread):
         self.life -= 1
         logging.warning('\033[91mDying:\033[0m Life: %d' % self.life, extra=self.data)
       time.sleep(60 / self.growthrate)
-    self.stop()
+    logging.warning('\033[91mDead:\033[0m Life: %d' % self.life, extra=self.data)
 
   def in_range(self, position):
     """ Returns if wheter or not the given position is aside the Farm.
@@ -110,5 +110,4 @@ class Farm(threading.Thread):
 
   def stop(self):
     """ Stops the Farm main loop. This will exit the Farm thread. """
-    logging.warning('\033[91mDead:\033[0m Life: %d' % self.life, extra=self.data)
     self.life = 0
