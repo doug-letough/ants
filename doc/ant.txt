@@ -54,6 +54,9 @@ Classes
                   Depending on the status of each the concerned Ants, some data are exchanged.                                   
                   An Ant can not hail a dead Ant.                                                                                
                                                                                                                                  
+               has_food(self)                                                                                                    
+                  Returns whether or not the Ant carries food                                                                    
+                                                                                                                                 
                in_range(self, position)                                                                                          
                   Returns if wheter or not the given position is aside the Ant.                                                  
                   - Position: A tuple seen as coordinates (x, y)                                                                 

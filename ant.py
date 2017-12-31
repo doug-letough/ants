@@ -186,32 +186,44 @@ class Ant(threading.Thread):
     Whenever an Ant encounter an another, it hails it.
     Depending on the status of each the concerned Ants, some data are exchanged.
     An Ant can not hail a dead Ant.
-    """ 
+    """
+    # FIXME: The following algorithm is not condensed for clarity
     todo = "\033[92mHail:\033[0m %s " % ant.ID
-    if not self.is_busy():
-      if ant.life > 0:
-        if ant.food > 0 and self.food == 0:
-          # Ant is lost, so we tell it the path to home
-          self.togo = [ant.position] + list(reversed(ant.history))
-          todo += '\033[92mFood path:\033[0m %s, \033[92mAnt position:\033[0m %s' % (str(self.togo), str(ant.position))
-          self.wait(config.ANT_SLEEP_DELAY)
-        elif ant.food == 0 and self.food > 0:
-          # Ant is lost, we tell it the pass to food
-          self.togo = [ant.position] + list(reversed(ant.history))
-          todo += '\033[92mHome path:\033[0m %s, \033[92mAnt position:\033[0m %s' % (str(self.togo), str(ant.position))
-          self.wait(config.ANT_SLEEP_DELAY)
-        elif ant.is_busy() and ant.food == 0 and self.food == 0 and not self.is_busy():
-          # Were are lost and ant seems to know the path to food
-          self.togo = ant.togo[:]
-          self.history = ant.history[:]
-          todo += '\033[92mFood path:\033[0m %s, \033[92mAnt position:\033[0m %s' % (str(self.togo), str(ant.position))
-          self.wait(config.ANT_SLEEP_DELAY)
-        elif ant.is_busy() and ant.food > 0 and self.food > 0 and not self.is_busy():
-          # We are lost and ant seems to know the path to home
-          self.togo = ant.togo[:]
-          self.history = ant.history[:]
-          todo += '\033[92mHome path:\033[0m %s, \033[92mAnt position:\033[0m %s' % (str(self.togo), str(ant.position))
-          self.wait(config.ANT_SLEEP_DELAY)
+    if ant.life > 0:
+      if not self.is_busy():
+        if self.has_food():
+          # We are lost and searching home
+          if ant.is_busy():
+            if ant.has_food():
+              # Ant is going home
+              self.togo = [ant.position] + ant.togo[:]
+              todo += '\033[92mHome path:\033[0m %s' % str(self.togo)
+              self.wait(config.ANT_SLEEP_DELAY)
+            else:
+              # Ant is going to food
+              self.togo = [ant.position] + list(reversed(ant.history))
+              todo += '\033[92mHome path:\033[0m %s' % str(self.togo)
+        else:
+          # We are looking for food
+          if ant.is_busy():
+            if ant.has_food():
+              # Ant knows where to find food
+              self.togo = [ant.position] + list(reversed(ant.history))
+              todo += '\033[92mFood path:\033[0m %s' % str(self.togo)
+            else:
+              # Ant knows where to find food
+              self.togo = [ant.position] + ant.togo[:]
+              todo += '\033[92mHome path:\033[0m %s' % str(self.togo)
+              self.wait(config.ANT_SLEEP_DELAY)
+          else:
+            if ant.has_food():
+              # Ant is lost and looking for home.
+              self.togo = [ant.position] + list(reversed(ant.history))
+              todo += '\033[92mFood path:\033[0m %s' % str(self.togo)
+              self.wait(config.ANT_SLEEP_DELAY)
+            else:
+              # Ant is looking for food
+              pass
     logging.warning(todo, extra=self.data)
 
   def store(self, farm):
@@ -273,6 +285,10 @@ class Ant(threading.Thread):
     An Ant is busy when the length of its path to go is > 0.
     """
     return len(self.togo) > 0
+
+  def has_food(self):
+    """ Returns whether or not the Ant carries food """
+    return self.food > 0
 
   def wait(self, delay):
     """ Wait time seconds """

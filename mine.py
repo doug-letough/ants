@@ -78,7 +78,7 @@ class Mine(object):
     """ Remove <q> food unit from Mine stock
     - q: An int value"""
     self.stock -= q
-    logging.warning('\033[92mAnt:\033[0m %s \033[92mmined:\033[0m %d' % (ant_id, q), extra=self.data)
+    logging.warning('\033[92mAnt:\033[0m %s \033[92mmined:\033[0m %d, \033[92mLeft:\033[0m %d' % (ant_id, q, self.stock), extra=self.data)
     if self.stock == 0:
       logging.warning('\033[91mStock:\033[0m %d' % self.stock, extra=self.data)
 
