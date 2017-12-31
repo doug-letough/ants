@@ -50,9 +50,9 @@ Your mileage may vary.
 
 This programm tries to demonstrate that ants **may** have a life based on random and basic reflexes only.
 
-It also provides a way to understand python multi-thread programming.
+It also provides a way to understand python multi-thread programming and inter-process communications.
 
-This project is **not** a science project.
+This project is **NOT** a science project.
 
 
 ## API and documentation
@@ -98,6 +98,11 @@ $ git clone https://github.com/doug-letough/ants.git ants
 ```
 
 
+## Configuration
+
+You'll find a bunch of parameters to play with in the application configuration file **config.py**.
+
+
 ## Run the Ants application
 
 Run the following commands
@@ -107,7 +112,7 @@ $ cd ants
 $ python -m ants
 ```
 
-**This application is a multitheaded program**.
+**This application is a massively multi-threaded program**.
 
 Closing the main window SHOULD exit the application.
 
