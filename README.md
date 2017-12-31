@@ -107,7 +107,7 @@ $ cd ants
 $ python -m ants
 ```
 
-As **this module is a multitheaded program**.
+**This application is a multitheaded program**.
 
 Closing the main window SHOULD exit the application.
 
