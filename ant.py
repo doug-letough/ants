@@ -81,12 +81,12 @@ class Ant(threading.Thread):
     if self.food > 0:
       self.color = config.ANT_HOMING_COLOR
       self.outline_color = config.ANT_LOST_OUTLINE_COLOR
-      if len(self.togo) > 0:
+      if self.is_busy():
         self.outline_color = config.ANT_BUSY_OUTLINE_COLOR
     else:
       self.color = config.ANT_HUNTING_COLOR
       self.outline_color = config.ANT_NEUTRAL_OUTLINE_COLOR
-      if len(self.togo) > 0:
+      if self.is_busy():
         self.outline_color = config.ANT_BUSY_OUTLINE_COLOR
 
   def walk(self):
@@ -94,7 +94,7 @@ class Ant(threading.Thread):
     If Ant already has a path to go, then the next position is picked up from this path.
     Otherwise, a new position is randomly picked up. 
     """
-    if len(self.togo) > 0:
+    if self.is_busy():
       self.new_position = self.pop_new_position()
     else:
       self.new_position = self.set_new_position()
@@ -188,14 +188,30 @@ class Ant(threading.Thread):
     An Ant can not hail a dead Ant.
     """ 
     todo = "\033[92mHail:\033[0m %s " % ant.ID
-    if len(self.togo) == 0:
+    if not self.is_busy():
       if ant.life > 0:
         if ant.food > 0 and self.food == 0:
+          # Ant is lost, so we tell it the path to home
           self.togo = [ant.position] + list(reversed(ant.history))
           todo += '\033[92mFood path:\033[0m %s, \033[92mAnt position:\033[0m %s' % (str(self.togo), str(ant.position))
+          self.wait(config.ANT_SLEEP_DELAY)
         elif ant.food == 0 and self.food > 0:
+          # Ant is lost, we tell it the pass to food
           self.togo = [ant.position] + list(reversed(ant.history))
           todo += '\033[92mHome path:\033[0m %s, \033[92mAnt position:\033[0m %s' % (str(self.togo), str(ant.position))
+          self.wait(config.ANT_SLEEP_DELAY)
+        elif ant.is_busy() and ant.food == 0 and self.food == 0 and not self.is_busy():
+          # Were are lost and ant seems to know the path to food
+          self.togo = ant.togo[:]
+          self.history = ant.history[:]
+          todo += '\033[92mFood path:\033[0m %s, \033[92mAnt position:\033[0m %s' % (str(self.togo), str(ant.position))
+          self.wait(config.ANT_SLEEP_DELAY)
+        elif ant.is_busy() and ant.food > 0 and self.food > 0 and not self.is_busy():
+          # We are lost and ant seems to know the path to home
+          self.togo = ant.togo[:]
+          self.history = ant.history[:]
+          todo += '\033[92mHome path:\033[0m %s, \033[92mAnt position:\033[0m %s' % (str(self.togo), str(ant.position))
+          self.wait(config.ANT_SLEEP_DELAY)
     logging.warning(todo, extra=self.data)
 
   def store(self, farm):
@@ -251,6 +267,16 @@ class Ant(threading.Thread):
     else:
       result = False
     return result
+
+  def is_busy(self):
+    """ Returns wheter or not the Ant is busy.
+    An Ant is busy when the length of its path to go is > 0.
+    """
+    return len(self.togo) > 0
+
+  def wait(self, delay):
+    """ Wait time seconds """
+    time.sleep(delay)
 
   def kill(self):
     """ Kill the Ant.

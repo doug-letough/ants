@@ -1,5 +1,9 @@
-# Ants (Virtual ant life form python module)
+# Ants: A virtual random based ant-like life form
 
+
+## Screenshot
+
+![Ants screenshot](screenshot.png)
 
 ## Disclaimer
 
@@ -72,7 +76,7 @@ $ kill -15 $(ps aux | grep "python -m ants" | grep -v grep | awk -F ' ' '{print 
 
 ## Logging
 
-This application logs many thing to stderr.
+This application logs many things to stderr.
 
 If you want to keep the logs of your runs, start the application with the following command:
 
@@ -82,6 +86,9 @@ $ python -m ants 2>&1 | tee -a ants.log
 
 This will still display the log to stderr and log this output to the ants.log file.
 
+## API documentation
+
+See ./documentation
 
 ## Uninstall
 

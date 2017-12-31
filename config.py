@@ -47,6 +47,8 @@ ANT_NEUTRAL_OUTLINE_COLOR = '#FFFFFF'
 ANT_LOST_OUTLINE_COLOR = '#FFFF00'
 # Ant outline color when busy
 ANT_BUSY_OUTLINE_COLOR = '#0000FF'
+# Sleep delay after hailing (in seconds)
+ANT_SLEEP_DELAY = 3
 
 # -----------------------------------------------------------------------------------------------------------------
 # PLAYGROUND
