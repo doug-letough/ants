@@ -17,6 +17,7 @@ As it uses python 2.7 standard modules only it may run on Windows or MacOS.
 ## Content
 
 ./README.md
+./screenshot.png
 ./playground.py
 ./config.py
 ./farm.py
