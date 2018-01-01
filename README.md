@@ -72,7 +72,7 @@ Generating documentation:
   [+] ./utils.py
 ```
 
-The **gendoc.sh** SHOULD be used as a Git pre-commit hook.
+The **gendoc.sh** script SHOULD be used as a Git pre-commit hook.
 
 For all details on objects and there method and attributes, see all files in the **/doc** directory.
 

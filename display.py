@@ -9,12 +9,12 @@ items (not necessarily numbers) to counts, and defines operations such as
 Shannon entropy and frequency normalization.
 """
 
+import config
 from Tkinter import *
 import Queue
 import threading
 import logging
 import time
-import atexit
 
 __author__ = "Doug Le Tough"
 __copyright__ = "Copyright 2017, Doug Le Tough"
@@ -111,8 +111,9 @@ class Display(object):
     self.width, self.height = size
     # The main Tk window
     self.master = Tk()
+    self.master.title(config.WINDOW_TITLE)
     self.workers = {}
-    # Register the stop() method with atexit module
+    # Register the stop() method to the WM_DELETE_WINDOW event
     self.master.protocol("WM_DELETE_WINDOW", self.stop)
     # Create all needed workers
     for w in xrange(max_ants):
