@@ -12,6 +12,7 @@
           
    Data   
             ANT_BUSY_OUTLINE_COLOR = '#0000FF'                                
+            ANT_DEAD_OUTLINE_COLOR = '#FF0000'                                
             ANT_HOMING_COLOR = '#00FF00'                                      
             ANT_HUNTING_COLOR = '#FF0000'                                     
             ANT_LOST_OUTLINE_COLOR = '#FFFF00'                                

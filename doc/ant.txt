@@ -82,7 +82,7 @@ Classes
                   For each new record, the history is recreated in a way that the shortest path                                  
                   from the oldest position to the current position is retained.                                                  
                   Still, the new shortest path will only use position wihin the history.                                         
-                  The shortest path from within the history is not always (never ?) the shortest path on the play ground.        
+                  The shortest path from within the history is rarely (who said never ?) the shortest path on the play ground.   
                                                                                                                                  
                restart(self)                                                                                                     
                   Restart after wait()                                                                                           

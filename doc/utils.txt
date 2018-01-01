@@ -9,14 +9,22 @@
    Modules            
                           random                                              
 
-         
-  Functions
-           gen_color()                                                           
-              Returns a randomly generated hexadecimal color value (HTML style). 
-                                                                                 
-           random_dir()                                                          
-              Randomly returns one of the direction values.                      
-              Directions values are: -1, 0, 1                                    
+       
+Functions
+         gen_color()                                                                                    
+            Returns a randomly generated hexadecimal color value (HTML style).                          
+                                                                                                        
+         get_shortest_path(ant_ID, checkpoints, destination, max_distance)                              
+            Returns shortest path to destination from within points in checkpoints                      
+                                                                                                        
+         in_range(point_a, point_b, max_distance)                                                       
+            Returns if wether or not 2 points (x, y) are separated from <distance> at max.              
+            This is very different from Ant.in_range(), Farm.in_range() or Mine.in_range() which return 
+            if a point is inside a perimeter.                                                           
+                                                                                                        
+         random_dir()                                                                                   
+            Randomly returns one of the direction values.                                               
+            Directions values are: -1, 0, 1                                                             
 
           
    Data   
