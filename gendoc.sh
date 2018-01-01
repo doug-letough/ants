@@ -50,3 +50,4 @@ if [ $# -gt 0 ]; then
   on_error
 fi
 gendoc
+git add .

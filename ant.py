@@ -293,8 +293,8 @@ class Ant(threading.Thread):
           self.food -= 1
           self.life += int(config.ANT_MAX_LIFE / 3)
         logging.warning('\033[92mPosition:\033[0m %s, \033[92mLife:\033[0m %d, \033[92mFood:\033[0m %d, \033[92mHistory:\033[0m %d' % (str(self.position), self.life, self.food, len(self.history)), extra=self.data)
-        time.sleep(.1)
-      time.sleep(.5)
+        time.sleep(config.ANT_TURN_SLEEP_DELAY)
+      time.sleep(config.ANT_HAIL_WAIT_DELAY)
     self.outline_color = config.ANT_DEAD_OUTLINE_COLOR
     self.display_q.put(self.to_dict())
     logging.warning('\033[91mDied at:\033[0m %s, \033[95mHistory:\033[0m %d' % (str(self.position), len(self.history)), extra=self.data)

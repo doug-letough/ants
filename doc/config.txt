@@ -13,6 +13,7 @@
    Data   
             ANT_BUSY_OUTLINE_COLOR = '#0000FF'                                
             ANT_DEAD_OUTLINE_COLOR = '#FF0000'                                
+            ANT_HAIL_WAIT_DELAY = 0.5                                         
             ANT_HOMING_COLOR = '#00FF00'                                      
             ANT_HUNTING_COLOR = '#FF0000'                                     
             ANT_LOST_OUTLINE_COLOR = '#FFFF00'                                
@@ -22,6 +23,7 @@
             ANT_NEUTRAL_OUTLINE_COLOR = '#FFFFFF'                             
             ANT_PAUSE_DELAY = 3                                               
             ANT_RADIUS = 1                                                    
+            ANT_TURN_SLEEP_DELAY = 0.2                                        
             FARM_COLOR = '#4B1BB4'                                            
             FARM_GROWTH_RATE = 60                                             
             FARM_INITIAL_FOOD_STOCK = 100                                     

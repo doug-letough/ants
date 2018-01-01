@@ -56,6 +56,14 @@ ANT_BUSY_OUTLINE_COLOR = '#0000FF'
 ANT_DEAD_OUTLINE_COLOR = '#FF0000'
 # Pause delay after hailing (in seconds)
 ANT_PAUSE_DELAY = 3
+# Delay in seconds between each turn
+ANT_TURN_SLEEP_DELAY = 0.2
+# Delay in seconds between each turn when in wait mode
+# DON'T TOUCH THIS
+ANT_HAIL_WAIT_DELAY = 0.5
+
+
+
 
 # -----------------------------------------------------------------------------------------------------------------
 # PLAYGROUND
