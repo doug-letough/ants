@@ -61,12 +61,18 @@ Classes
                   Returns if wheter or not the given position is aside the Ant.                                                  
                   - Position: A tuple seen as coordinates (x, y)                                                                 
                                                                                                                                  
+               is_alice(self)                                                                                                    
+                  Rturns wether or not Ant <life> is > 0                                                                         
+                                                                                                                                 
                is_busy(self)                                                                                                     
                   Returns wheter or not the Ant is busy.                                                                         
                   An Ant is busy when the length of its path to go is > 0.                                                       
                                                                                                                                  
                mine(self, mine)                                                                                                  
                   Pick the maximum food amount from the given mine.                                                              
+                                                                                                                                 
+               pause(self, delay)                                                                                                
+                  Wait time seconds                                                                                              
                                                                                                                                  
                pop_new_position(self)                                                                                            
                   Pick the next position in the path to go.                                                                      
@@ -77,6 +83,9 @@ Classes
                   from the oldest position to the current position is retained.                                                  
                   Still, the new shortest path will only use position wihin the history.                                         
                   The shortest path from within the history is not always (never ?) the shortest path on the play ground.        
+                                                                                                                                 
+               restart(self)                                                                                                     
+                  Restart after wait()                                                                                           
                                                                                                                                  
                run(self)                                                                                                         
                   The Ant thread main loop                                                                                       
@@ -109,8 +118,8 @@ Classes
                   Returns a dict representation of the Ant object. This representation is                                        
                   used by the Display workers to display the Ant.                                                                
                                                                                                                                  
-               wait(self, delay)                                                                                                 
-                  Wait time seconds                                                                                              
+               wait(self)                                                                                                        
+                  Wait until restart() is called.                                                                                
                                                                                                                                  
                walk(self)                                                                                                        
                   Set a new position.                                                                                            

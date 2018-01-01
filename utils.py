@@ -5,6 +5,7 @@
 """
 
 import random
+#~ import logging
 
 __author__ = "Doug Le Tough"
 __copyright__ = "Copyright 2017, Doug Le Tough"
@@ -40,3 +41,28 @@ def gen_color():
   """ Returns a randomly generated hexadecimal color value (HTML style)."""
   alpha = ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F')
   return '#%s' % ''.join([random.choice(alpha) for _ in range(6)])
+
+def get_shortest_path(ant_ID, checkpoints, destination, max_distance):
+  """ Returns shortest path to destination from within points in checkpoints """
+  data = {'type': 'Ant shortest path: %s' % ant_ID}
+  best_path = []
+  if len(checkpoints) == 0:
+    checkpoints = [destination]
+  for checkpoint in checkpoints:
+    best_path.append(checkpoint)
+    if checkpoint == destination:
+      break
+    if in_range(checkpoint, destination, max_distance):
+      best_path.append(destination)
+      break
+  if destination in best_path:
+    return best_path[:]
+  logging.warning("\033[91mError: \033[92mHistory:\033[0m %s, \033[92mDestination:\033[0m: %s, \033[92mBest path:\033[0m %s" % (str(checkpoints), str(destination), str(best_path)), extra=data)
+  return []
+
+def in_range(point_a, point_b, max_distance):
+  """ Returns if wether or not 2 points (x, y) are separated from <distance> at max.
+  This is very different from Ant.in_range(), Farm.in_range() or Mine.in_range() which return
+  if a point is inside a perimeter.
+  """
+  return abs(point_a[0] - point_b[0]) <= max_distance and abs(point_a[1] - point_b[1]) <= max_distance

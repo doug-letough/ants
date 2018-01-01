@@ -48,11 +48,11 @@ Your mileage may vary.
 
 ## Goal
 
-This programm tries to demonstrate that ants **may** have a life based on random and basic reflexes only.
+This programm is a pure **C**omputer **A**ssisted **B**ullshit trying to demonstrate that ants **may** have a life based on random and basic reflexes only.
 
 It also provides a way to understand python multi-thread programming and inter-process communications.
 
-This project is **NOT** a science project.
+This project is **NOT** a science projectn it's **CAB**.
 
 
 ## API and documentation

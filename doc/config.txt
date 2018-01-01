@@ -19,8 +19,8 @@
             ANT_MAX_HISTORY = 300                                             
             ANT_MAX_LIFE = 100000                                             
             ANT_NEUTRAL_OUTLINE_COLOR = '#FFFFFF'                             
+            ANT_PAUSE_DELAY = 3                                               
             ANT_RADIUS = 1                                                    
-            ANT_SLEEP_DELAY = 3                                               
             FARM_COLOR = '#4B1BB4'                                            
             FARM_GROWTH_RATE = 60                                             
             FARM_INITIAL_FOOD_STOCK = 100                                     

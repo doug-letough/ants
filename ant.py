@@ -42,20 +42,18 @@ class Ant(threading.Thread):
     self.color = config.ANT_HUNTING_COLOR
     self.outline_color = config.ANT_NEUTRAL_OUTLINE_COLOR
     self.ID = str(uuid.uuid4())
-    self.radius = config.ANT_RADIUS
     self.playground = playground
     self.position = position
     self.new_position = position
     self.direction = None
     self.display_q = display_q
     self.farm_id = farm_id
-    self.max_life = config.ANT_MAX_LIFE
-    self.life = self.max_life
-    self.max_history = config.ANT_MAX_HISTORY
+    self.life = config.ANT_MAX_LIFE
+    self.waiting = False
     self.history = []
     self.togo = []
-    self.max_food = config.ANT_MAX_FOOD
     self.food = 0
+    self.last_hail = None
     self.data = {'type': 'Ant %s' % (self.ID)}
 
   def __str__(self):
@@ -70,7 +68,7 @@ class Ant(threading.Thread):
             'ID': self.ID,
             'old_position': self.position,
             'new_position': self.new_position,
-            'radius': self.radius,
+            'radius': config.ANT_RADIUS,
             'color': self.color,
             'outline': self.outline_color
            }
@@ -138,27 +136,15 @@ class Ant(threading.Thread):
     For each new record, the history is recreated in a way that the shortest path
     from the oldest position to the current position is retained.
     Still, the new shortest path will only use position wihin the history.
-    The shortest path from within the history is not always (never ?) the shortest path on the play ground.
+    The shortest path from within the history is rarely (who said never ?) the shortest path on the play ground.
     """
-    if len(self.history) == 0:
-      self.history.append(self.position)
-      return
-    x, y = self.position
-    new_history = []
-    for position in self.history:
-      px, py = position
-      new_history.append(position)
-      if abs(px - self.position[0]) <= 1 and abs(py - self.position[1]) <=1:
-        new_history.append(self.position)
-        self.history = new_history[:]
-        return
-    logging.warning("\033[91mWTF:\033[0m %s, \033[92mHistory:\033[0m %d" % (str(self.position), len(self.history)) , extra=self.data)
+    self.history = utils.get_shortest_path(self.ID, self.history, self.position, config.ANT_RADIUS)
 
   def clean_history(self):
     """ Delete oldest position in history when history length is larger than <max_history>.
     See config.ANT_MAX_HISTORY
     """
-    if len(self.history) > self.max_history:
+    if len(self.history) > config.ANT_MAX_HISTORY:
       logging.warning("\033[92mCleaning history:\033[0m %d" % len(self.history), extra=self.data)
       self.history.pop(0)
 
@@ -189,41 +175,46 @@ class Ant(threading.Thread):
     """
     # FIXME: The following algorithm is not condensed for clarity
     todo = "\033[92mHail:\033[0m %s " % ant.ID
-    if ant.life > 0:
-      if not self.is_busy():
-        if self.has_food():
-          # We are lost and searching home
-          if ant.is_busy():
-            if ant.has_food():
-              # Ant is going home
-              self.togo = [ant.position] + ant.togo[:]
-              todo += '\033[92mHome path:\033[0m %s' % str(self.togo)
-              self.wait(config.ANT_SLEEP_DELAY)
-            else:
-              # Ant is going to food
-              self.togo = [ant.position] + list(reversed(ant.history))
-              todo += '\033[92mHome path:\033[0m %s' % str(self.togo)
+    ant.wait()
+    if not self.is_busy():
+      if self.has_food():
+        # We are lost and searching home
+        if ant.is_busy():
+          if ant.has_food() and self.last_hail != ant.ID:
+            # Ant is going home
+            self.last_hail = ant.ID
+            self.togo = [ant.position] + ant.togo[:]
+            todo += '\033[92mHome path (1):\033[0m %s' % str(self.togo)
+            self.pause(config.ANT_PAUSE_DELAY)
+          elif self.last_hail != ant.ID:
+            # Ant is going to food
+            self.togo = [ant.position] + list(reversed(ant.history))
+            todo += '\033[92mHome path (2):\033[0m %s' % str(self.togo)
+      else:
+        # We are looking for food
+        if ant.is_busy():
+          if ant.has_food() and self.last_hail != ant.ID:
+            # Ant knows where to find food
+            self.last_hail = ant.ID
+            self.togo = [ant.position] + list(reversed(ant.history))
+            todo += '\033[92mFood path (1):\033[0m %s' % str(self.togo)
+          elif self.last_hail != ant.ID:
+            # Ant knows where to find food
+            self.last_hail = ant.ID
+            self.togo = [self.position] + ant.togo[:]
+            todo += '\033[92mFood path (2):\033[0m %s' % str(self.togo)
+            self.pause(config.ANT_PAUSE_DELAY)
         else:
-          # We are looking for food
-          if ant.is_busy():
-            if ant.has_food():
-              # Ant knows where to find food
-              self.togo = [ant.position] + list(reversed(ant.history))
-              todo += '\033[92mFood path:\033[0m %s' % str(self.togo)
-            else:
-              # Ant knows where to find food
-              self.togo = [ant.position] + ant.togo[:]
-              todo += '\033[92mHome path:\033[0m %s' % str(self.togo)
-              self.wait(config.ANT_SLEEP_DELAY)
-          else:
-            if ant.has_food():
-              # Ant is lost and looking for home.
-              self.togo = [ant.position] + list(reversed(ant.history))
-              todo += '\033[92mFood path:\033[0m %s' % str(self.togo)
-              self.wait(config.ANT_SLEEP_DELAY)
-            else:
-              # Ant is looking for food
-              pass
+          if ant.has_food() and self.last_hail != ant.ID:
+            # Ant is lost and looking for home.
+            self.last_hail = ant.ID
+            self.togo = [ant.position] + list(reversed(ant.history))
+            todo += '\033[92mFood path (3):\033[0m %s' % str(self.togo)
+            self.pause(config.ANT_PAUSE_DELAY)
+          elif self.last_hail != ant.ID:
+            # Ant is looking for food
+            pass
+    ant.restart()
     logging.warning(todo, extra=self.data)
 
   def store(self, farm):
@@ -238,13 +229,13 @@ class Ant(threading.Thread):
 
   def mine(self, mine):
     """ Pick the maximum food amount from the given mine."""
-    if self.food < self.max_food:
+    if self.food < config.ANT_MAX_FOOD:
       food = 0
       if mine.stock > 0:
         food = mine.stock
         self.swap_histories()
-        if mine.stock >= self.max_food - self.food:
-          food = self.max_food - self.food
+        if mine.stock >= config.ANT_MAX_FOOD - self.food:
+          food = config.ANT_MAX_FOOD - self.food
       mine.pick(food, self.ID)
       self.food = food
       logging.warning('\033[92mHome path:\033[0m %s' % str(self.togo), extra=self.data)
@@ -268,13 +259,13 @@ class Ant(threading.Thread):
     dx = abs(pos_x - self.position[0])
     dy = abs(pos_y - self.position[1])
     result = False
-    if dx + dy <= self.radius:
+    if dx + dy <= config.ANT_RADIUS:
         result = True
-    if dx > self.radius:
+    if dx > config.ANT_RADIUS:
         result = False
-    if dy > self.radius:
+    if dy > config.ANT_RADIUS:
         result = False
-    if pow(dx, 2) + pow(dy, 2) <= pow(self.radius, 2):
+    if pow(dx, 2) + pow(dy, 2) <= pow(config.ANT_RADIUS, 2):
         result = True
     else:
       result = False
@@ -286,31 +277,50 @@ class Ant(threading.Thread):
     """
     return len(self.togo) > 0
 
+  def is_alice(self):
+    """ Rturns wether or not Ant <life> is > 0"""
+    return self.life > 0
+
   def has_food(self):
     """ Returns whether or not the Ant carries food """
     return self.food > 0
 
-  def wait(self, delay):
+  def wait(self):
+    """ Wait until restart() is called."""
+    logging.warning('\033[92mStatus:\033[0m Waiting', extra=self.data)
+    self.waiting = True
+
+  def restart(self):
+    """ Restart after wait() """
+    logging.warning('\033[92mStatus:\033[0m Restarted', extra=self.data)
+    self.waiting = False
+
+  def pause(self, delay):
     """ Wait time seconds """
     time.sleep(delay)
 
   def stop(self):
     """ Kill the Ant.
     this will exit the Ant thread. """
+    self.wait()
     self.life = 0
 
   def run(self):
     """ The Ant thread main loop """
     while self.life > 0:
-      self.check_around()
-      self.set_colors()
-      self.walk()
-      self.record()
-      self.clean_history()
-      self.life -= 1
-      if self.life == 0 and self.food > 0:
-        self.food -= 1
-        self.life += int(self.max_life / 3)
-      logging.warning('\033[92mPosition:\033[0m %s, \033[92mLife:\033[0m %d, \033[92mFood:\033[0m %d, \033[92mHistory:\033[0m %d' % (str(self.position), self.life, self.food, len(self.history)), extra=self.data)
-      time.sleep(.1)
+      while not self.waiting:
+        self.check_around()
+        self.set_colors()
+        self.walk()
+        self.record()
+        self.clean_history()
+        self.life -= 1
+        if self.life == 0 and self.food > 0:
+          self.food -= 1
+          self.life += int(config.ANT_MAX_LIFE / 3)
+        logging.warning('\033[92mPosition:\033[0m %s, \033[92mLife:\033[0m %d, \033[92mFood:\033[0m %d, \033[92mHistory:\033[0m %d' % (str(self.position), self.life, self.food, len(self.history)), extra=self.data)
+        time.sleep(.1)
+      time.sleep(.5)
+    self.outline_color = config.ANT_DEAD_OUTLINE_COLOR
+    self.display_q.put(self.to_dict())
     logging.warning('\033[91mDied at:\033[0m %s, \033[95mHistory:\033[0m %d' % (str(self.position), len(self.history)), extra=self.data)

@@ -150,18 +150,22 @@ class Display(object):
     color: The ant body color
     outline: The ant outline color
     """
-    if len(self.canvas.find_withtag(ID)) > 0:
-      # Ant already exists so we compute the new_pos/old_pos offset 
-      x_offset = new_pos[0] - old_pos[0]
-      y_offset = new_pos[1] - old_pos[1]
-      self.canvas.itemconfig(ID, fill=color, outline=outline)
-      self.canvas.move(ID, x_offset, y_offset)
-    else:
-      # Ant is new
-      self.canvas.create_oval(new_pos[0] - radius, new_pos[1] - radius , new_pos[0] + radius , new_pos[1] + radius, tags=ID, fill=color, outline=outline)
-      # Put the ant up in the higher layer
-      self.canvas.tag_raise(ID)
-    self.update_gui()
+    try:
+      if len(self.canvas.find_withtag(ID)) > 0:
+        # Ant already exists so we compute the new_pos/old_pos offset 
+        x_offset = new_pos[0] - old_pos[0]
+        y_offset = new_pos[1] - old_pos[1]
+        self.canvas.itemconfig(ID, fill=color, outline=outline)
+        self.canvas.move(ID, x_offset, y_offset)
+      else:
+        # Ant is new
+        self.canvas.create_oval(new_pos[0] - radius, new_pos[1] - radius , new_pos[0] + radius , new_pos[1] + radius, tags=ID, fill=color, outline=outline)
+        # Put the ant up in the higher layer
+        self.canvas.tag_raise(ID)
+      self.update_gui()
+    except Exception as e:
+      logging.warning('\033[91mError:\033[0m %s' % str(e), extra=self.data)
+      exit(0)
 
   def draw_mine(self, ID, pos, radius, color, outline):
     """
@@ -213,10 +217,11 @@ class Display(object):
 
   def stop(self):
     """ Send stop signal to all objects (ants, farms, mines, workers)"""
-    logging.warning('\033[93mSending kill signal\033[0m', extra=self.data)
+    logging.warning('\033[91mSending kill signal\033[0m', extra=self.data)
     self.response_q.put({'type': 'kill'})
     for worker in self.workers:
       self.workers[worker].stop()
     self.master.destroy()
-    logging.warning('\033[93mExiting\033[0m', extra=self.data)
+    logging.warning('\033[91mMaster window destroyed\033[0m', extra=self.data)
+    logging.warning('\033[91mExiting\033[0m', extra=self.data)
     exit(0)

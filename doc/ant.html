@@ -83,10 +83,14 @@ An&nbsp;<a href="#Ant">Ant</a>&nbsp;can&nbsp;not&nbsp;hail&nbsp;a&nbsp;dead&nbsp
 <dl><dt><a name="Ant-in_range"><strong>in_range</strong></a>(self, position)</dt><dd><tt>Returns&nbsp;if&nbsp;wheter&nbsp;or&nbsp;not&nbsp;the&nbsp;given&nbsp;position&nbsp;is&nbsp;aside&nbsp;the&nbsp;<a href="#Ant">Ant</a>.<br>
 -&nbsp;Position:&nbsp;A&nbsp;tuple&nbsp;seen&nbsp;as&nbsp;coordinates&nbsp;(x,&nbsp;y)</tt></dd></dl>
 
+<dl><dt><a name="Ant-is_alice"><strong>is_alice</strong></a>(self)</dt><dd><tt>Rturns&nbsp;wether&nbsp;or&nbsp;not&nbsp;<a href="#Ant">Ant</a>&nbsp;&lt;life&gt;&nbsp;is&nbsp;&gt;&nbsp;0</tt></dd></dl>
+
 <dl><dt><a name="Ant-is_busy"><strong>is_busy</strong></a>(self)</dt><dd><tt>Returns&nbsp;wheter&nbsp;or&nbsp;not&nbsp;the&nbsp;<a href="#Ant">Ant</a>&nbsp;is&nbsp;busy.<br>
 An&nbsp;<a href="#Ant">Ant</a>&nbsp;is&nbsp;busy&nbsp;when&nbsp;the&nbsp;length&nbsp;of&nbsp;its&nbsp;path&nbsp;to&nbsp;go&nbsp;is&nbsp;&gt;&nbsp;0.</tt></dd></dl>
 
 <dl><dt><a name="Ant-mine"><strong>mine</strong></a>(self, mine)</dt><dd><tt>Pick&nbsp;the&nbsp;maximum&nbsp;food&nbsp;amount&nbsp;from&nbsp;the&nbsp;given&nbsp;mine.</tt></dd></dl>
+
+<dl><dt><a name="Ant-pause"><strong>pause</strong></a>(self, delay)</dt><dd><tt>Wait&nbsp;time&nbsp;seconds</tt></dd></dl>
 
 <dl><dt><a name="Ant-pop_new_position"><strong>pop_new_position</strong></a>(self)</dt><dd><tt>Pick&nbsp;the&nbsp;next&nbsp;position&nbsp;in&nbsp;the&nbsp;path&nbsp;to&nbsp;go.</tt></dd></dl>
 
@@ -95,6 +99,8 @@ For&nbsp;each&nbsp;new&nbsp;record,&nbsp;the&nbsp;history&nbsp;is&nbsp;recreated
 from&nbsp;the&nbsp;oldest&nbsp;position&nbsp;to&nbsp;the&nbsp;current&nbsp;position&nbsp;is&nbsp;retained.<br>
 Still,&nbsp;the&nbsp;new&nbsp;shortest&nbsp;path&nbsp;will&nbsp;only&nbsp;use&nbsp;position&nbsp;wihin&nbsp;the&nbsp;history.<br>
 The&nbsp;shortest&nbsp;path&nbsp;from&nbsp;within&nbsp;the&nbsp;history&nbsp;is&nbsp;not&nbsp;always&nbsp;(never&nbsp;?)&nbsp;the&nbsp;shortest&nbsp;path&nbsp;on&nbsp;the&nbsp;play&nbsp;ground.</tt></dd></dl>
+
+<dl><dt><a name="Ant-restart"><strong>restart</strong></a>(self)</dt><dd><tt>Restart&nbsp;after&nbsp;<a href="#Ant-wait">wait</a>()</tt></dd></dl>
 
 <dl><dt><a name="Ant-run"><strong>run</strong></a>(self)</dt><dd><tt>The&nbsp;<a href="#Ant">Ant</a>&nbsp;thread&nbsp;main&nbsp;loop</tt></dd></dl>
 
@@ -120,7 +126,7 @@ Same&nbsp;process&nbsp;occurs&nbsp;when&nbsp;an&nbsp;<a href="#Ant">Ant</a>&nbsp
 <dl><dt><a name="Ant-to_dict"><strong>to_dict</strong></a>(self)</dt><dd><tt>Returns&nbsp;a&nbsp;dict&nbsp;representation&nbsp;of&nbsp;the&nbsp;<a href="#Ant">Ant</a>&nbsp;object.&nbsp;This&nbsp;representation&nbsp;is<br>
 used&nbsp;by&nbsp;the&nbsp;Display&nbsp;workers&nbsp;to&nbsp;display&nbsp;the&nbsp;<a href="#Ant">Ant</a>.</tt></dd></dl>
 
-<dl><dt><a name="Ant-wait"><strong>wait</strong></a>(self, delay)</dt><dd><tt>Wait&nbsp;time&nbsp;seconds</tt></dd></dl>
+<dl><dt><a name="Ant-wait"><strong>wait</strong></a>(self)</dt><dd><tt>Wait&nbsp;until&nbsp;<a href="#Ant-restart">restart</a>()&nbsp;is&nbsp;called.</tt></dd></dl>
 
 <dl><dt><a name="Ant-walk"><strong>walk</strong></a>(self)</dt><dd><tt>Set&nbsp;a&nbsp;new&nbsp;position.<br>
 If&nbsp;<a href="#Ant">Ant</a>&nbsp;already&nbsp;has&nbsp;a&nbsp;path&nbsp;to&nbsp;go,&nbsp;then&nbsp;the&nbsp;next&nbsp;position&nbsp;is&nbsp;picked&nbsp;up&nbsp;from&nbsp;this&nbsp;path.<br>

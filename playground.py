@@ -102,9 +102,7 @@ class Playground(object):
     - position is a tupe seen as coordinates (x, y)
     """
     try:
-      around = [(utils.directions[direction][0] + position[0], utils.directions[direction][1] + position[1]) \
-                for direction in utils.directions]
-      ants = [self.ants[ant] for ant in self.ants if self.ants[ant].in_range(position)]
+      ants = [self.ants[ant] for ant in self.ants if self.ants[ant].in_range(position) and self.ants[ant].is_alive()]
       farms = [self.farms[farm] for farm in self.farms if self.farms[farm].in_range(position)]
       mines = [self.mines[mine] for mine in self.mines if self.mines[mine].in_range(position)]
     except RuntimeError:
