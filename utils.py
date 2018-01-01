@@ -44,6 +44,7 @@ def gen_color():
 
 def get_shortest_path(ant_ID, checkpoints, destination, max_distance):
   """ Returns shortest path to destination from within points in checkpoints """
+  # FIXME: Any better optimization algorithm out here ?
   data = {'type': 'Ant shortest path: %s' % ant_ID}
   best_path = []
   if len(checkpoints) == 0:

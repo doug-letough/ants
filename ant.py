@@ -138,6 +138,8 @@ class Ant(threading.Thread):
     Still, the new shortest path will only use position wihin the history.
     The shortest path from within the history is rarely (who said never ?) the shortest path on the play ground.
     """
+    # FIXME: utils.get_shortest_path()
+    # Any better optimization algorithm out here ?
     self.history = utils.get_shortest_path(self.ID, self.history, self.position, config.ANT_RADIUS)
 
   def clean_history(self):
@@ -173,47 +175,19 @@ class Ant(threading.Thread):
     Depending on the status of each the concerned Ants, some data are exchanged.
     An Ant can not hail a dead Ant.
     """
-    # FIXME: The following algorithm is not condensed for clarity
     todo = "\033[92mHail:\033[0m %s " % ant.ID
     ant.wait()
-    if not self.is_busy():
-      if self.has_food():
-        # We are lost and searching home
-        if ant.is_busy():
-          if ant.has_food() and self.last_hail != ant.ID:
-            # Ant is going home
-            self.last_hail = ant.ID
-            self.togo = [ant.position] + ant.togo[:]
-            todo += '\033[92mHome path (1):\033[0m %s' % str(self.togo)
-            self.pause(config.ANT_PAUSE_DELAY)
-          elif self.last_hail != ant.ID:
-            # Ant is going to food
-            self.togo = [ant.position] + list(reversed(ant.history))
-            todo += '\033[92mHome path (2):\033[0m %s' % str(self.togo)
-      else:
-        # We are looking for food
-        if ant.is_busy():
-          if ant.has_food() and self.last_hail != ant.ID:
-            # Ant knows where to find food
-            self.last_hail = ant.ID
-            self.togo = [ant.position] + list(reversed(ant.history))
-            todo += '\033[92mFood path (1):\033[0m %s' % str(self.togo)
-          elif self.last_hail != ant.ID:
-            # Ant knows where to find food
-            self.last_hail = ant.ID
-            self.togo = [self.position] + ant.togo[:]
-            todo += '\033[92mFood path (2):\033[0m %s' % str(self.togo)
-            self.pause(config.ANT_PAUSE_DELAY)
-        else:
-          if ant.has_food() and self.last_hail != ant.ID:
-            # Ant is lost and looking for home.
-            self.last_hail = ant.ID
-            self.togo = [ant.position] + list(reversed(ant.history))
-            todo += '\033[92mFood path (3):\033[0m %s' % str(self.togo)
-            self.pause(config.ANT_PAUSE_DELAY)
-          elif self.last_hail != ant.ID:
-            # Ant is looking for food
-            pass
+    # Fucking Hack: Compare a string representation of multiple boolean conditions
+    history_table = ['0110', '0110', '0001']
+    togo_table =['0111', '0010']
+    truth = '%d%d%d%d' % (self.is_busy(), self.has_food(), ant.is_busy(), ant.has_food())
+    if truth in history_table:
+      self.togo = [ant.position] + list(reversed(ant.history))
+      self.pause(config.ANT_PAUSE_DELAY)
+    elif truth in togo_table:
+      self.togo = [ant.position] + ant.togo[:]
+      self.pause(config.ANT_PAUSE_DELAY)
+    # /Fucking hack
     ant.restart()
     logging.warning(todo, extra=self.data)
 
