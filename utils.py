@@ -57,7 +57,10 @@ def get_shortest_path(ant_ID, checkpoints, destination, max_distance):
   try:
     best = [checkpoints.index(point) for point in checkpoints if in_range(point, destination, max_distance)][0]
   except IndexError:
+    # WTF: Ant jumped over checkpoint !
+    # Let's log it and return a brand new hystory
     logging.warning('\033[91m[get_shortest_path]:\033[0m \033[92mAnt ID:\033[0m %s, \033[92mCheckpoints:\033[0m %s, \033[92mdestination:\033[0m %s' % (ant_ID, str(checkpoints), str(destination)), extra=data)
+    return [destination]
   # Best path is the part of checkpoints from 0 to the index of the first
   # point in range of <destination>
   best_path = checkpoints[:best+1]

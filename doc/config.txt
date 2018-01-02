@@ -31,7 +31,7 @@
             FARM_OUTLINE_COLOR = '#FFFFFF'                                    
             FARM_POS = (100, 100)                                             
             FARM_RADIUS = 10                                                  
-            FARM_SURVIVAL_TIMEOUT = 10                                        
+            FARM_SURVIVAL_TIMEOUT = 1000                                      
             FORMAT = '%(asctime)-15s: \x1b[95m%(type)-10s:\x1b[0m             
             %(message)s'                                                      
             MINE_COLOR = '#EF26AD'                                            

@@ -85,7 +85,7 @@ FARM_POS = (PLAYGROUND_SIZE[0]/2 , PLAYGROUND_SIZE[0]/2)
 # MUST be <= 60
 FARM_GROWTH_RATE = 60
 # How many time in minutes a farm can survive without food stock
-FARM_SURVIVAL_TIMEOUT = 10
+FARM_SURVIVAL_TIMEOUT = 1000
 # Radius of a farm
 FARM_RADIUS = 10
 # Food stock of newly created farm 
