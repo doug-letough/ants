@@ -69,7 +69,7 @@ ANT_HAIL_WAIT_DELAY = 0.5
 # PLAYGROUND
 # -----------------------------------------------------------------------------------------------------------------
 # Playground dimension
-PLAYGROUND_SIZE = (600, 600)
+PLAYGROUND_SIZE = (200, 200)
 
 # -----------------------------------------------------------------------------------------------------------------
 # FARM
@@ -82,9 +82,9 @@ FARM_GROWTH_RATE = 60
 # How many time in minutes a farm can survive without food stock
 FARM_SURVIVAL_TIMEOUT = 10
 # Radius of a farm
-FARM_RADIUS = 20
+FARM_RADIUS = 10
 # Food stock of newly created farm 
-FARM_INITIAL_FOOD_STOCK = 100
+FARM_INITIAL_FOOD_STOCK = 50
 # Farm body color
 FARM_COLOR = '#4B1BB4'
 # Farm outline color
@@ -94,10 +94,10 @@ FARM_OUTLINE_COLOR = '#FFFFFF'
 # Mine
 # -----------------------------------------------------------------------------------------------------------------
 # Radius of a mine
-MINE_RADIUS = 20
+MINE_RADIUS = 10
 # Mine body color
 MINE_COLOR = '#EF26AD'
 # Mine outline color
 MINE_OUTLINE_COLOR = '#FFFFFF'
 # Mine initial amount of food
-MINE_INITIAL_STOCK = 1000
+MINE_INITIAL_STOCK = 100

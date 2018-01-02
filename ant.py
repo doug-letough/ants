@@ -209,8 +209,8 @@ class Ant(threading.Thread):
         self.swap_histories()
         if mine.stock >= config.ANT_MAX_FOOD - self.food:
           food = config.ANT_MAX_FOOD - self.food
-      mine.pick(food, self.ID)
-      self.food = food
+        mine.pick(food, self.ID)
+        self.food = food
 
   def swap_histories(self):
     """ Swap history and path to go.

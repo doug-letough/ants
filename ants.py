@@ -37,7 +37,7 @@ if __name__ == '__main__':
   # Create play ground
   ground = playground.Playground(config.PLAYGROUND_SIZE, response_q)
   # Create a food mine
-  mine_position = (int(config.FARM_POS[0] + 110), int(config.FARM_POS[1] + 110))
+  mine_position = (int(config.FARM_POS[0] + 50), int(config.FARM_POS[1] + 50))
   mine = mine.Mine(mine_position, config.MINE_RADIUS)
   # Add the mine to the playground
   ground.add_mine(mine)
