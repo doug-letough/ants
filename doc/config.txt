@@ -40,7 +40,7 @@
             MINE_RADIUS = 10                                                  
             PLAYGROUND_SIZE = (200, 200)                                      
             WINDOW_TITLE = 'Ants: A Computer Assisted Bullshit for random     
-            based life research'                                              
+            based life form research'                                         
             __author__ = 'Doug Le Tough'                                      
             __copyright__ = 'Copyright 2017, Doug Le Tough'                   
             __credits__ = ['Doug Le Tough']                                   

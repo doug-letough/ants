@@ -1,4 +1,4 @@
-# Ants: A Computer Assisted Bullshit for random based life research
+# Ants: A Computer Assisted Bullshit for random based life form research
 
 
 ## Screenshot

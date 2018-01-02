@@ -29,7 +29,7 @@ logging.basicConfig(format=FORMAT)
 # -----------------------------------------------------------------------------------------------------------------
 # GUI
 # -----------------------------------------------------------------------------------------------------------------
-WINDOW_TITLE = 'Ants: A Computer Assisted Bullshit for random based life research'
+WINDOW_TITLE = 'Ants: A Computer Assisted Bullshit for random based life form research'
 
 # -----------------------------------------------------------------------------------------------------------------
 # ANT
