@@ -57,6 +57,8 @@ Classes
                stop(self)                                                                                              
                   Stops the Farm main loop. This will exit the Farm thread.                                            
                                                                                                                        
+               store(self, food, ant_ID)                                                                               
+                                                                                                                       
                to_dict(self)                                                                                           
                   Returns a dict representation of the Farm object. This representation is                             
                   used by the Display workers to display the Farm.                                                     

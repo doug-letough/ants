@@ -1,4 +1,4 @@
-# Ants: A virtual random based ant-like life form
+# Ants: A Computer Assisted Bullshit for random based life research
 
 
 ## Screenshot
@@ -9,7 +9,7 @@
 
 This module is intended to run as a python 2.7 module and is provided AS IS under the WTFPL (See LICENSE.TXT).
 
-This module has been tested on Linux systems **ONLY**.
+This module has been tested on Linux and OpenBSD systems **ONLY**.
 
 However it uses python 2.7 standard modules only and it may run on Windows or MacOS.
 

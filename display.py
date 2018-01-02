@@ -116,7 +116,7 @@ class Display(object):
     # Register the stop() method to the WM_DELETE_WINDOW event
     self.master.protocol("WM_DELETE_WINDOW", self.stop)
     # Create all needed workers
-    for w in xrange(int(max_ants / 4)):
+    for w in xrange(int(max_ants / 4) + 1):
       self.workers[w] = Worker(self, w, self.display_q)
       self.workers[w].start()
     # Build the GUI

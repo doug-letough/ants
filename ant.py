@@ -147,7 +147,6 @@ class Ant(threading.Thread):
     See config.ANT_MAX_HISTORY
     """
     if len(self.history) > config.ANT_MAX_HISTORY:
-      logging.warning("\033[92mCleaning history:\033[0m %d" % len(self.history), extra=self.data)
       self.history.pop(0)
 
   def check_around(self):
@@ -178,13 +177,15 @@ class Ant(threading.Thread):
     todo = "\033[92mHail:\033[0m %s " % ant.ID
     ant.wait()
     # Fucking Hack: Compare a string representation of multiple boolean conditions
-    history_table = ['0110', '0110', '0001']
+    history_table = ['0110', '0011', '0001']
     togo_table =['0111', '0010']
     truth = '%d%d%d%d' % (self.is_busy(), self.has_food(), ant.is_busy(), ant.has_food())
     if truth in history_table:
+      todo += "033[92mUpdated:\033[0m Togo" 
       self.togo = [ant.position] + list(reversed(ant.history))
       self.pause(config.ANT_PAUSE_DELAY)
     elif truth in togo_table:
+      todo += "033[92mUpdated:\033[0m History" 
       self.togo = [ant.position] + ant.togo[:]
       self.pause(config.ANT_PAUSE_DELAY)
     # /Fucking hack
@@ -195,11 +196,9 @@ class Ant(threading.Thread):
     """ Stores the carried food to the given farm. """
     if farm.ID == self.farm_id and self.food > 0:
       food = self.food
-      farm.food += self.food
+      farm.store(self.food, self.ID)
       self.food = 0
       self.swap_histories()
-      logging.warning("\033[92mFood stored:\033[0m %d, \033[92mTotal stock:\033[0m %s" % (food, farm.food), extra=self.data)
-      logging.warning("\033[92mFood path:\033[0m %s" % str(self.togo), extra=self.data)
 
   def mine(self, mine):
     """ Pick the maximum food amount from the given mine."""
@@ -212,7 +211,6 @@ class Ant(threading.Thread):
           food = config.ANT_MAX_FOOD - self.food
       mine.pick(food, self.ID)
       self.food = food
-      logging.warning('\033[92mHome path:\033[0m %s' % str(self.togo), extra=self.data)
 
   def swap_histories(self):
     """ Swap history and path to go.
@@ -224,7 +222,6 @@ class Ant(threading.Thread):
     """
     self.togo = list(reversed(self.history))
     self.history = [self.position]
-    logging.warning('\033[92mHistory:\033[0m %s, \033[92mTogo:\033[0m %s' % (str(self.history), str(self.togo)), extra=self.data)
 
   def in_range(self, position):
     """ Returns if wheter or not the given position is aside the Ant.
@@ -292,7 +289,7 @@ class Ant(threading.Thread):
         if self.life == 0 and self.food > 0:
           self.food -= 1
           self.life += int(config.ANT_MAX_LIFE / 3)
-        logging.warning('\033[92mPosition:\033[0m %s, \033[92mLife:\033[0m %d, \033[92mFood:\033[0m %d, \033[92mHistory:\033[0m %d' % (str(self.position), self.life, self.food, len(self.history)), extra=self.data)
+        logging.warning('\033[92mPosition:\033[0m %s, \033[92mLife:\033[0m %d, \033[92mFood:\033[0m %d, \033[92mBusy:\033[0m %s, \033[92mHistory:\033[0m %d' % (str(self.position), self.life, self.food, self.is_busy(), len(self.history)), extra=self.data)
         time.sleep(config.ANT_TURN_SLEEP_DELAY)
       time.sleep(config.ANT_HAIL_WAIT_DELAY)
     self.outline_color = config.ANT_DEAD_OUTLINE_COLOR

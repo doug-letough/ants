@@ -74,6 +74,10 @@ class Farm(threading.Thread):
             'color': self.color,
             'outline': self.outline_color}
 
+  def store(self, food, ant_ID):
+    self.food += food
+    logging.warning('\033[93mFood received from\033[0m %s: %d' % (ant_ID, food), extra=self.data)
+
   def run(self):
     """ The Farm object main thread loop """
     while self.life > 0:

@@ -29,7 +29,7 @@ logging.basicConfig(format=FORMAT)
 # -----------------------------------------------------------------------------------------------------------------
 # GUI
 # -----------------------------------------------------------------------------------------------------------------
-WINDOW_TITLE = 'Ants: A Computer Assisted Bullshit for random life research'
+WINDOW_TITLE = 'Ants: A Computer Assisted Bullshit for random based life research'
 
 # -----------------------------------------------------------------------------------------------------------------
 # ANT
@@ -84,7 +84,7 @@ FARM_SURVIVAL_TIMEOUT = 10
 # Radius of a farm
 FARM_RADIUS = 20
 # Food stock of newly created farm 
-FARM_INITIAL_FOOD_STOCK= 100
+FARM_INITIAL_FOOD_STOCK = 100
 # Farm body color
 FARM_COLOR = '#4B1BB4'
 # Farm outline color

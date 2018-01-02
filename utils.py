@@ -5,7 +5,7 @@
 """
 
 import random
-#~ import logging
+import logging
 
 __author__ = "Doug Le Tough"
 __copyright__ = "Copyright 2017, Doug Le Tough"
@@ -30,6 +30,8 @@ directions = { 0: [0, 0],
                8: [-1, -1]
              }
 
+data = {'type': 'Utils:'}
+
 def random_dir():
   """ Randomly returns one of the direction values.
   Directions values are: -1, 0, 1
@@ -44,22 +46,25 @@ def gen_color():
 
 def get_shortest_path(ant_ID, checkpoints, destination, max_distance):
   """ Returns shortest path to destination from within points in checkpoints """
-  # FIXME: Any better optimization algorithm out here ?
-  data = {'type': 'Ant shortest path: %s' % ant_ID}
   best_path = []
   if len(checkpoints) == 0:
-    checkpoints = [destination]
-  for checkpoint in checkpoints:
-    best_path.append(checkpoint)
-    if checkpoint == destination:
-      break
-    if in_range(checkpoint, destination, max_distance):
-      best_path.append(destination)
-      break
-  if destination in best_path:
-    return best_path[:]
-  logging.warning("\033[91mError: \033[92mHistory:\033[0m %s, \033[92mDestination:\033[0m: %s, \033[92mBest path:\033[0m %s" % (str(checkpoints), str(destination), str(best_path)), extra=data)
-  return []
+    # This the first point ever for this ant
+    # So we just add it and return the list as is
+    checkpoints.append(destination)
+    return checkpoints
+  # Get the index of all points in checkpoints in relation to <destination>
+  # and keep only the first one
+  try:
+    best = [checkpoints.index(point) for point in checkpoints if in_range(point, destination, max_distance)][0]
+  except IndexError:
+    logging.warning('\033[91m[get_shortest_path]:\033[0m \033[92mAnt ID:\033[0m %s, \033[92mCheckpoints:\033[0m %s, \033[92mdestination:\033[0m %s' % (ant_ID, str(checkpoints), str(destination)), extra=data)
+  # Best path is the part of checkpoints from 0 to the index of the first
+  # point in range of <destination>
+  best_path = checkpoints[:best+1]
+  if best_path[len(best_path) - 1] != destination:
+    # destination is not already in best path, so we add it
+    best_path.append(destination)
+  return best_path
 
 def in_range(point_a, point_b, max_distance):
   """ Returns if wether or not 2 points (x, y) are separated from <distance> at max.
