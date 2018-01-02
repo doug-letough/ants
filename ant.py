@@ -73,6 +73,10 @@ class Ant(threading.Thread):
             'outline': self.outline_color
            }
 
+  def display(self, new=False):
+    """ Send Ant dict representation to Display """
+    self.display_q.put(self.to_dict())
+
   def set_colors(self):
     """ Adjust the Ant colors depending on the Ant status.
     """
@@ -96,7 +100,7 @@ class Ant(threading.Thread):
       self.new_position = self.pop_new_position()
     else:
       self.new_position = self.set_new_position()
-    self.display_q.put(self.to_dict())
+    self.display()
     self.position = self.new_position
     
   def set_new_position(self):
@@ -248,8 +252,8 @@ class Ant(threading.Thread):
     """
     return len(self.togo) > 0
 
-  def is_alice(self):
-    """ Rturns wether or not Ant <life> is > 0"""
+  def is_alive(self):
+    """ Returns wether or not Ant <life> is > 0"""
     return self.life > 0
 
   def has_food(self):
@@ -278,7 +282,8 @@ class Ant(threading.Thread):
 
   def run(self):
     """ The Ant thread main loop """
-    while self.life > 0:
+    
+    while self.is_alive():
       while not self.waiting:
         self.check_around()
         self.set_colors()
@@ -286,7 +291,7 @@ class Ant(threading.Thread):
         self.record()
         self.clean_history()
         self.life -= 1
-        if self.life == 0 and self.food > 0:
+        if not self.is_alive() and self.food > 0:
           self.food -= 1
           self.life += int(config.ANT_MAX_LIFE / 3)
         logging.warning('\033[92mPosition:\033[0m %s, \033[92mLife:\033[0m %d, \033[92mFood:\033[0m %d, \033[92mBusy:\033[0m %s, \033[92mHistory:\033[0m %d' % (str(self.position), self.life, self.food, self.is_busy(), len(self.history)), extra=self.data)

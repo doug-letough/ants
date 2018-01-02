@@ -113,12 +113,12 @@ class Display(object):
     self.master = Tk()
     self.master.title(config.WINDOW_TITLE)
     self.workers = {}
+    self.num_ants = 0
     # Register the stop() method to the WM_DELETE_WINDOW event
     self.master.protocol("WM_DELETE_WINDOW", self.stop)
     # Create all needed workers
-    for w in xrange(int(max_ants / 4) + 1):
-      self.workers[w] = Worker(self, w, self.display_q)
-      self.workers[w].start()
+    self.workers[len(self.workers)] = Worker(self, len(self.workers), self.display_q)
+    self.workers[len(self.workers) - 1].start()
     # Build the GUI
     self.build_gui()
     # Update the display
@@ -160,9 +160,14 @@ class Display(object):
         self.canvas.move(ID, x_offset, y_offset)
       else:
         # Ant is new
+        self.num_ants += 1
         self.canvas.create_oval(new_pos[0] - radius, new_pos[1] - radius , new_pos[0] + radius , new_pos[1] + radius, tags=ID, fill=color, outline=outline)
         # Put the ant up in the higher layer
         self.canvas.tag_raise(ID)
+        # create a new worker if needed
+        if self.num_ants / len(self.workers) > config.DISPLAY_ANT_BY_WORKERS:
+          self.workers[len(self.workers)] = Worker(self, len(self.workers), self.display_q)
+          self.workers[len(self.workers) - 1].start()
       self.update_gui()
     except Exception as e:
       logging.warning('\033[91mError:\033[0m %s' % str(e), extra=self.data)

@@ -48,6 +48,9 @@ Classes
                   Delete oldest position in history when history length is larger than <max_history>.                            
                   See config.ANT_MAX_HISTORY                                                                                     
                                                                                                                                  
+               display(self, new=False)                                                                                          
+                  Send Ant dict representation to Display                                                                        
+                                                                                                                                 
                hail(self, ant)                                                                                                   
                   Hails the given Ant.                                                                                           
                   Whenever an Ant encounter an another, it hails it.                                                             
@@ -61,8 +64,8 @@ Classes
                   Returns if wheter or not the given position is aside the Ant.                                                  
                   - Position: A tuple seen as coordinates (x, y)                                                                 
                                                                                                                                  
-               is_alice(self)                                                                                                    
-                  Rturns wether or not Ant <life> is > 0                                                                         
+               is_alive(self)                                                                                                    
+                  Returns wether or not Ant <life> is > 0                                                                        
                                                                                                                                  
                is_busy(self)                                                                                                     
                   Returns wheter or not the Ant is busy.                                                                         
@@ -142,13 +145,6 @@ Classes
                   returns a list of all alive threads.                                                                           
                                                                                                                                  
                isDaemon(self)                                                                                                    
-                                                                                                                                 
-               is_alive = isAlive(self)                                                                                          
-                  Return whether the thread is alive.                                                                            
-                                                                                                                                 
-                  This method returns True just before the run() method starts until just                                        
-                  after the run() method terminates. The module function enumerate()                                             
-                  returns a list of all alive threads.                                                                           
                                                                                                                                  
                join(self, timeout=None)                                                                                          
                   Wait until the thread terminates.                                                                              

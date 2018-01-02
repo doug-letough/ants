@@ -24,6 +24,7 @@
             ANT_PAUSE_DELAY = 3                                               
             ANT_RADIUS = 1                                                    
             ANT_TURN_SLEEP_DELAY = 0.2                                        
+            DISPLAY_ANT_BY_WORKERS = 4                                        
             FARM_COLOR = '#4B1BB4'                                            
             FARM_GROWTH_RATE = 60                                             
             FARM_INITIAL_FOOD_STOCK = 50                                      
@@ -34,7 +35,7 @@
             FORMAT = '%(asctime)-15s: \x1b[95m%(type)-10s:\x1b[0m             
             %(message)s'                                                      
             MINE_COLOR = '#EF26AD'                                            
-            MINE_INITIAL_STOCK = 100                                          
+            MINE_INITIAL_STOCK = 1000                                         
             MINE_OUTLINE_COLOR = '#FFFFFF'                                    
             MINE_RADIUS = 10                                                  
             PLAYGROUND_SIZE = (200, 200)                                      
