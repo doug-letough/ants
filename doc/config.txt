@@ -18,7 +18,7 @@
             ANT_HUNTING_COLOR = '#FF0000'                                     
             ANT_LOST_OUTLINE_COLOR = '#FFFF00'                                
             ANT_MAX_FOOD = 5                                                  
-            ANT_MAX_HISTORY = 300                                             
+            ANT_MAX_HISTORY = 100                                             
             ANT_MAX_LIFE = 100000                                             
             ANT_NEUTRAL_OUTLINE_COLOR = '#FFFFFF'                             
             ANT_PAUSE_DELAY = 3                                               

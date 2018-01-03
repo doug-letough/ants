@@ -41,7 +41,7 @@ ANT_MAX_LIFE = 100000
 # How many food unit an ant can carry
 ANT_MAX_FOOD = 5
 # How many moves an ant can remmeber
-ANT_MAX_HISTORY = 300
+ANT_MAX_HISTORY = 100
 # Ant body color when looking for food
 ANT_HUNTING_COLOR = '#FF0000'
 # Ant body color when looking for home
