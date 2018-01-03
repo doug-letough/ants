@@ -55,6 +55,7 @@ class Ant(threading.Thread):
     self.food = 0
     self.last_hail = None
     self.data = {'type': 'Ant %s' % (self.ID)}
+    self.around = {'ants': [], 'mines': [], 'farms': []}
 
   def __str__(self):
     """ Returns a string representation of the Ant. """
@@ -157,10 +158,10 @@ class Ant(threading.Thread):
     """ Process actions according to what is around the present position.
     Object around the present position are given bay the Playground.scan(position) method.
     """
-    around = self.playground.scan(self.position)
-    ants = around['ants']
-    farms = around['farms']
-    mines = around['mines']
+    self.around = self.playground.scan(self.position)
+    ants = self.around['ants']
+    farms = self.around['farms']
+    mines = self.around['mines']
     if len(farms) > 0:
       for farm in farms:
         self.store(farm)
@@ -181,9 +182,9 @@ class Ant(threading.Thread):
     todo = "\033[92mHail:\033[0m %s " % ant.ID
     ant.wait()
     # Fucking Hack: Compare a string representation of multiple boolean conditions
-    history_table = ['0110', '0011', '0001']
-    togo_table =['0111', '0010']
-    truth = '%d%d%d%d' % (self.is_busy(), self.has_food(), ant.is_busy(), ant.has_food())
+    history_table = ['00110', '00011', '00001']
+    togo_table =['10111', '10010', '00111', '00010']
+    truth = '%d%d%d%d%d' % (self.near_mine(), self.is_busy(), self.has_food(), ant.is_busy(), ant.has_food())
     if truth in history_table:
       todo += "033[92mUpdated:\033[0m Togo" 
       self.togo = [ant.position] + list(reversed(ant.history))
@@ -203,6 +204,10 @@ class Ant(threading.Thread):
       farm.store(self.food, self.ID)
       self.food = 0
       self.swap_histories()
+
+  def near_mine(self):
+    """ Returns wether or not the Ant is near a mine """
+    return len(self.around['mines']) > 0
 
   def mine(self, mine):
     """ Pick the maximum food amount from the given mine."""

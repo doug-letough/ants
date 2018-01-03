@@ -74,6 +74,9 @@ Classes
                mine(self, mine)                                                                                                  
                   Pick the maximum food amount from the given mine.                                                              
                                                                                                                                  
+               near_mine(self)                                                                                                   
+                  Returns wether or not the Ant is near a mine                                                                   
+                                                                                                                                 
                pause(self, delay)                                                                                                
                   Wait time seconds                                                                                              
                                                                                                                                  
