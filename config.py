@@ -37,7 +37,7 @@ WINDOW_TITLE = 'Ants: A Computer Assisted Bullshit for random based life form re
 # Ant radius (Don't touch this)
 ANT_RADIUS = 1
 # Max number of moves for an ant
-ANT_MAX_LIFE = 100000
+ANT_MAX_LIFE = 1000
 # How many food unit an ant can carry
 ANT_MAX_FOOD = 5
 # How many moves an ant can remmeber
@@ -105,4 +105,4 @@ MINE_COLOR = '#EF26AD'
 # Mine outline color
 MINE_OUTLINE_COLOR = '#FFFFFF'
 # Mine initial amount of food
-MINE_INITIAL_STOCK = 1000
+MINE_INITIAL_STOCK = 100

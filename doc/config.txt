@@ -19,7 +19,7 @@
             ANT_LOST_OUTLINE_COLOR = '#FFFF00'                                
             ANT_MAX_FOOD = 5                                                  
             ANT_MAX_HISTORY = 100                                             
-            ANT_MAX_LIFE = 100000                                             
+            ANT_MAX_LIFE = 1000                                               
             ANT_NEUTRAL_OUTLINE_COLOR = '#FFFFFF'                             
             ANT_PAUSE_DELAY = 3                                               
             ANT_RADIUS = 1                                                    
@@ -35,7 +35,7 @@
             FORMAT = '%(asctime)-15s: \x1b[95m%(type)-10s:\x1b[0m             
             %(message)s'                                                      
             MINE_COLOR = '#EF26AD'                                            
-            MINE_INITIAL_STOCK = 1000                                         
+            MINE_INITIAL_STOCK = 100                                          
             MINE_OUTLINE_COLOR = '#FFFFFF'                                    
             MINE_RADIUS = 10                                                  
             PLAYGROUND_SIZE = (200, 200)                                      

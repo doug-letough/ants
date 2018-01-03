@@ -284,7 +284,7 @@ class Ant(threading.Thread):
     """ The Ant thread main loop """
     
     while self.is_alive():
-      while not self.waiting:
+      if not self.waiting:
         self.check_around()
         self.set_colors()
         self.walk()
@@ -295,8 +295,9 @@ class Ant(threading.Thread):
           self.food -= 1
           self.life += int(config.ANT_MAX_LIFE / 3)
         logging.warning('\033[92mPosition:\033[0m %s, \033[92mLife:\033[0m %d, \033[92mFood:\033[0m %d, \033[92mBusy:\033[0m %s, \033[92mHistory:\033[0m %d' % (str(self.position), self.life, self.food, self.is_busy(), len(self.history)), extra=self.data)
-        time.sleep(config.ANT_TURN_SLEEP_DELAY)
-      time.sleep(config.ANT_HAIL_WAIT_DELAY)
+      else:
+        time.sleep(config.ANT_HAIL_WAIT_DELAY)
+      time.sleep(config.ANT_TURN_SLEEP_DELAY)
     self.outline_color = config.ANT_DEAD_OUTLINE_COLOR
     self.display_q.put(self.to_dict())
     logging.warning('\033[91mDied at:\033[0m %s, \033[95mHistory:\033[0m %d' % (str(self.position), len(self.history)), extra=self.data)
