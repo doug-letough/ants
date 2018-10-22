@@ -6,8 +6,8 @@
 
           
    Modules
-            config   multiprocessing                        threading  utils  
-            logging  random                                 time       uuid   
+            config           multiprocessing  threading        utils          
+            logging          random           time             uuid           
 
        
 Classes
@@ -234,10 +234,10 @@ Classes
             __status__ = 'Testing'                                            
             __version__ = '1.0.0'                                             
 
-                      
-   Author             
-                          Doug Le Tough                                       
+          
+   Author 
+            Doug Le Tough                                                     
 
-                      
-   Credits            
-                          ['Doug Le Tough']                                   
+          
+   Credits
+            ['Doug Le Tough']                                                 

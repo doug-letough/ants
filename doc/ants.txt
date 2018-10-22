@@ -1,15 +1,14 @@
                                                                               
-                                                                              
-   ants (version                                                        index
-   1.0.0)                              /home/doug/projets/python/ants/ants.py
+                                                                        index 
+   ants (version 1.0.0)                /home/doug/projets/python/ants/ants.py
 
    The ants module entry point.
 
           
    Modules
-            ant                   farm                 playground             
-            config                logging              random                 
-            display               mine                 utils                  
+            ant              farm             playground                      
+            config           logging          random                          
+            display          mine             utils                           
 
           
    Data   
@@ -22,10 +21,10 @@
             __status__ = 'Testing'                                            
             __version__ = '1.0.0'                                             
 
-                      
-   Author             
-                          Doug Le Tough                                       
+          
+   Author 
+            Doug Le Tough                                                     
 
-                      
-   Credits            
-                          ['Doug Le Tough']                                   
+          
+   Credits
+            ['Doug Le Tough']                                                 

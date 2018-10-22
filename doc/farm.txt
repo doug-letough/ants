@@ -1,7 +1,6 @@
                                                                               
-                                                                              
-   farm (version                                                        index
-   1.0.0)                              /home/doug/projets/python/ants/farm.py
+                                                                        index 
+   farm (version 1.0.0)                /home/doug/projets/python/ants/farm.py
 
    Provides the Farm class for the ants module.
     
@@ -9,8 +8,8 @@
 
           
    Modules
-            ant     logging                                 threading  utils  
-            config  multiprocessing                         time       uuid   
+            ant              logging          threading        utils          
+            config           multiprocessing  time             uuid           
 
        
 Classes
@@ -172,10 +171,10 @@ Classes
             __status__ = 'Testing'                                            
             __version__ = '1.0.0'                                             
 
-                      
-   Author             
-                          Doug Le Tough                                       
+          
+   Author 
+            Doug Le Tough                                                     
 
-                      
-   Credits            
-                          ['Doug Le Tough']                                   
+          
+   Credits
+            ['Doug Le Tough']                                                 

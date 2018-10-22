@@ -1,14 +1,13 @@
                                                                               
-                                                                              
-   mine (version                                                        index
-   1.0.0)                              /home/doug/projets/python/ants/mine.py
+                                                                        index 
+   mine (version 1.0.0)                /home/doug/projets/python/ants/mine.py
 
    Provides the Mine class for the ants module.
 
-              
-   Modules    
-                 config                  random               uuid            
-                 logging                 utils                                
+          
+   Modules
+            config           random           uuid                            
+            logging          utils                                            
 
        
 Classes
@@ -66,10 +65,10 @@ Classes
             __status__ = 'Testing'                                            
             __version__ = '1.0.0'                                             
 
-                      
-   Author             
-                          Doug Le Tough                                       
+          
+   Author 
+            Doug Le Tough                                                     
 
-                      
-   Credits            
-                          ['Doug Le Tough']                                   
+          
+   Credits
+            ['Doug Le Tough']                                                 

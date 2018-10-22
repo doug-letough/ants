@@ -114,6 +114,7 @@ class Display(object):
     self.master.title(config.WINDOW_TITLE)
     self.workers = {}
     self.num_ants = 0
+    self.sv_num_ants = StringVar()
     # Register the stop() method to the WM_DELETE_WINDOW event
     self.master.protocol("WM_DELETE_WINDOW", self.stop)
     # Create all needed workers
@@ -136,6 +137,10 @@ class Display(object):
     """ Build the GUI with widgets from Tkinter module """
     self.canvas_frame = LabelFrame(self.master, width=self.width+10, height=self.height+10, text='Ants')
     self.canvas = Canvas(self.canvas_frame, width=self.width, height=self.height, background='black', relief=SUNKEN)
+    self.num_ants_entry = Entry(self.canvas_frame, justify=RIGHT, width=10, textvariable=self.sv_num_ants)
+    self.num_ants_label = Label(self.canvas_frame, justify=LEFT, text='Number of ants')
+    self.num_ants_label.grid()
+    self.num_ants_entry.grid()
     self.canvas.grid()
     self.canvas_frame.grid(row=0, column=0)
 
@@ -161,6 +166,7 @@ class Display(object):
       else:
         # Ant is new
         self.num_ants += 1
+        self.sv_num_ants.set(str(self.num_ants))
         self.canvas.create_oval(new_pos[0] - radius, new_pos[1] - radius , new_pos[0] + radius , new_pos[1] + radius, tags=ID, fill=color, outline=outline)
         # Put the ant up in the higher layer
         self.canvas.tag_raise(ID)

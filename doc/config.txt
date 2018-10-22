@@ -1,13 +1,12 @@
                                                                               
-                                                                              
-   config (version                                                      index
-   1.0.0)                            /home/doug/projets/python/ants/config.py
+                                                                        index 
+   config (version 1.0.0)            /home/doug/projets/python/ants/config.py
 
    Provides basic configuration for the Ants application.
 
-                      
-   Modules            
-                          logging                                             
+          
+   Modules
+            logging                                                           
 
           
    Data   
@@ -50,10 +49,10 @@
             __status__ = 'Testing'                                            
             __version__ = '1.0.0'                                             
 
-                      
-   Author             
-                          Doug Le Tough                                       
+          
+   Author 
+            Doug Le Tough                                                     
 
-                      
-   Credits            
-                          ['Doug Le Tough']                                   
+          
+   Credits
+            ['Doug Le Tough']                                                 

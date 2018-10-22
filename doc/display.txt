@@ -1,7 +1,6 @@
                                                                               
-                                                                              
-   display (version                                                     index
-   1.0.0)                           /home/doug/projets/python/ants/display.py
+                                                                        index 
+   display (version 1.0.0)          /home/doug/projets/python/ants/display.py
 
    Provides Worker and Display classes.
     
@@ -331,10 +330,10 @@ Classes
             __version__ = '1.0.0'                                             
             wantobjects = 1                                                   
 
-                      
-   Author             
-                          Doug Le Tough                                       
+          
+   Author 
+            Doug Le Tough                                                     
 
-                      
-   Credits            
-                          ['Doug Le Tough']                                   
+          
+   Credits
+            ['Doug Le Tough']                                                 

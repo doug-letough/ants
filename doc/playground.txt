@@ -1,15 +1,14 @@
                                                                               
-                                                                              
-   playground                                                           index
-   (version 1.0.0)               /home/doug/projets/python/ants/playground.py
+                                                                        index 
+   playground (version 1.0.0)    /home/doug/projets/python/ants/playground.py
 
    Provides the Playground class which is the sandbox where
    ants are living.
 
           
    Modules
-            Queue                 multiprocessing          utils              
-            logging               threading                                   
+            Queue            multiprocessing  utils                           
+            logging          threading                                        
 
        
 Classes
@@ -212,10 +211,10 @@ Classes
             __status__ = 'Testing'                                            
             __version__ = '1.0.0'                                             
 
-                      
-   Author             
-                          Doug Le Tough                                       
+          
+   Author 
+            Doug Le Tough                                                     
 
-                      
-   Credits            
-                          ['Doug Le Tough']                                   
+          
+   Credits
+            ['Doug Le Tough']                                                 
